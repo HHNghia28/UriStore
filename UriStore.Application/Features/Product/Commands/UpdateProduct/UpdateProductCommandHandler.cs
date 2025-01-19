@@ -24,7 +24,7 @@ namespace UriStore.Application.Features.Product.Commands.UpdateProduct
             product.Quantity = request.Quantity;
             product.Photo = request.Photo;
             product.CategoryId = request.CategoryId;
-            product.LastModifiedBy = request.LastModifiedBy;
+            product.LastModifiedById = request.LastModifiedById;
 
             await _productRepository.UpdateAsync(product);
             await _productRepository.SaveAsync();

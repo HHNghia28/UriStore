@@ -14,7 +14,7 @@ namespace UriStore.Application.Features.Category.Commands.UpdateCategory
         [JsonIgnore]
         public int Id { get; set; }
         [JsonIgnore]
-        public Guid LastModifiedBy { get; set; }
+        public Guid LastModifiedById { get; set; }
         [Required]
         [StringLength(100)]
         public string Name { get; set; }

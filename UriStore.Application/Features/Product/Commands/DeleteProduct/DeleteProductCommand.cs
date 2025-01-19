@@ -13,6 +13,6 @@ namespace UriStore.Application.Features.Product.Commands.DeleteProduct
     {
         public Guid Id { get; set; }
 
-        public Guid LastModifiedBy { get; set; }
+        public Guid LastModifiedById { get; set; }
     }
 }

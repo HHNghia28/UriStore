@@ -25,7 +25,7 @@ namespace UriStore.Application.Features.Product.Commands.UpdateProduct
         public string Photo { get; set; }
 
         [JsonIgnore]
-        public Guid LastModifiedBy { get; set; }
+        public Guid LastModifiedById { get; set; }
         public int CategoryId { get; set; }
     }
 }

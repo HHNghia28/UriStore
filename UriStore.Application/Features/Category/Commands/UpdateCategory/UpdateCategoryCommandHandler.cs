@@ -17,7 +17,7 @@ namespace UriStore.Application.Features.Category.Commands.UpdateCategory
         {
             var category = await _categoryRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Category not found");
 
-            category.LastModifiedBy = request.LastModifiedBy;
+            category.LastModifiedById = request.LastModifiedById;
             category.Name = request.Name;
 
             await _categoryRepository.UpdateAsync(category);

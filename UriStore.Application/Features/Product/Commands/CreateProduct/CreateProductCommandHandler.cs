@@ -22,8 +22,8 @@ namespace UriStore.Application.Features.Product.Commands.CreateProduct
                 Discount = request.Discount,
                 Quantity = request.Quantity,
                 Photo = request.Photo,
-                CreatedBy = request.CreatedBy,
-                LastModifiedBy = request.CreatedBy,
+                CreatedById = request.CreatedById,
+                LastModifiedById = request.CreatedById,
                 CategoryId = request.CategoryId,
             });
 

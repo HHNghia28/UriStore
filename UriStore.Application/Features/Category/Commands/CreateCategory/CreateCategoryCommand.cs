@@ -12,7 +12,7 @@ namespace UriStore.Application.Features.Category.Commands.CreateCategory
     public class CreateCategoryCommand : IRequest
     {
         [JsonIgnore]
-        public Guid CreatedBy { get; set; }
+        public Guid CreatedById { get; set; }
         [Required]
         [StringLength(100)]
         public string Name { get; set; }

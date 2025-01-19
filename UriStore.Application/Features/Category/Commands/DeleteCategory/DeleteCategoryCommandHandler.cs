@@ -17,7 +17,7 @@ namespace UriStore.Application.Features.Category.Commands.DeleteCategory
         {
             var category = await _categoryRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Category not found");
 
-            category.LastModifiedBy = request.UserId;
+            category.LastModifiedById = request.UserId;
             category.IsDeleted = true;
 
             await _categoryRepository.UpdateAsync(category);

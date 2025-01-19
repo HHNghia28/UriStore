@@ -17,7 +17,7 @@ namespace UriStore.Application.Features.Product.Commands.DeleteProduct
         {
             var product = await _productRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Product not found");
 
-            product.LastModifiedBy = request.LastModifiedBy;
+            product.LastModifiedById = request.LastModifiedById;
             product.IsDeleted = true;
 
             await _productRepository.UpdateAsync(product);

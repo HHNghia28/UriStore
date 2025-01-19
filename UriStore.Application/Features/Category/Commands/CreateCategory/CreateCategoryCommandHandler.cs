@@ -17,8 +17,8 @@ namespace UriStore.Application.Features.Category.Commands.CreateCategory
             await _categoryRepository.AddAsync(new Domain.Entities.Category
             {
                 Name = request.Name,
-                CreatedBy = request.CreatedBy,
-                LastModifiedBy = request.CreatedBy,
+                CreatedById = request.CreatedById,
+                LastModifiedById = request.CreatedById,
             });
 
             await _categoryRepository.SaveAsync();

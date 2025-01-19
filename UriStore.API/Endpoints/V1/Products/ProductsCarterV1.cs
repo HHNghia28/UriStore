@@ -46,7 +46,7 @@ namespace UriStore.API.Endpoints.V1.Products
 
         public async Task<IResult> Create(ISender sender, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] CreateProductCommand request)
         {
-            request.CreatedBy = userId;
+            request.CreatedById = userId;
             await sender.Send(request);
             return Results.Ok("Create product successful");
         }
@@ -54,14 +54,14 @@ namespace UriStore.API.Endpoints.V1.Products
         public async Task<IResult> Update(ISender sender, Guid id, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] UpdateProductCommand request)
         {
             request.Id = id;
-            request.LastModifiedBy = userId;
+            request.LastModifiedById = userId;
             await sender.Send(request);
             return Results.Ok("Update product successful");
         }
 
         public async Task<IResult> Delete(ISender sender, Guid id, [FromHeader(Name = "X-User-Id")] Guid userId)
         {
-            await sender.Send(new DeleteProductCommand { Id = id, LastModifiedBy = userId});
+            await sender.Send(new DeleteProductCommand { Id = id, LastModifiedById = userId});
             return Results.Ok("Delete product successful");
         }
     }

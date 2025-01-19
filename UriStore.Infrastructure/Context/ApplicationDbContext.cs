@@ -72,10 +72,10 @@ namespace UriStore.Infrastructure.Context
 
             builder.Entity<Category>()
                 .HasData(
-                    new Category { Id = 1, Name = "Coffee", CreatedBy = adminId, LastModifiedBy = adminId },
-                    new Category { Id = 2, Name = "Tea", CreatedBy = adminId, LastModifiedBy = adminId },
-                    new Category { Id = 3, Name = "Banh Mi", CreatedBy = adminId, LastModifiedBy = adminId },
-                    new Category { Id = 4, Name = "Other", CreatedBy = adminId, LastModifiedBy = adminId }
+                    new Category { Id = 1, Name = "Coffee", CreatedById = adminId, LastModifiedById = adminId },
+                    new Category { Id = 2, Name = "Tea", CreatedById = adminId, LastModifiedById = adminId },
+                    new Category { Id = 3, Name = "Banh Mi", CreatedById = adminId, LastModifiedById = adminId },
+                    new Category { Id = 4, Name = "Other", CreatedById = adminId, LastModifiedById = adminId }
             );
 
             builder.Entity<Product>()
@@ -90,8 +90,8 @@ namespace UriStore.Infrastructure.Context
                         Price = 55000,
                         Discount = 0,
                         Quantity = 325,
-                        CreatedBy = adminId,
-                        LastModifiedBy = adminId,
+                        CreatedById = adminId,
+                        LastModifiedById = adminId,
                     },
                     new Product
                     {
@@ -103,8 +103,8 @@ namespace UriStore.Infrastructure.Context
                         Price = 65000,
                         Discount = 5,
                         Quantity = 0,
-                        CreatedBy = adminId,
-                        LastModifiedBy = adminId,
+                        CreatedById = adminId,
+                        LastModifiedById = adminId,
                     },
                     new Product
                     {
@@ -116,8 +116,8 @@ namespace UriStore.Infrastructure.Context
                         Price = 45000,
                         Discount = 0,
                         Quantity = 5,
-                        CreatedBy = adminId,
-                        LastModifiedBy = adminId,
+                        CreatedById = adminId,
+                        LastModifiedById = adminId,
                     },
                     new Product
                     {
@@ -129,8 +129,8 @@ namespace UriStore.Infrastructure.Context
                         Price = 45000,
                         Discount = 0,
                         Quantity = 214,
-                        CreatedBy = adminId,
-                        LastModifiedBy = adminId,
+                        CreatedById = adminId,
+                        LastModifiedById = adminId,
                     },
                     new Product
                     {
@@ -142,8 +142,8 @@ namespace UriStore.Infrastructure.Context
                         Price = 45000,
                         Discount = 10,
                         Quantity = 45,
-                        CreatedBy = adminId,
-                        LastModifiedBy = adminId,
+                        CreatedById = adminId,
+                        LastModifiedById = adminId,
                     },
                     new Product
                     {
@@ -155,8 +155,8 @@ namespace UriStore.Infrastructure.Context
                         Price = 19000,
                         Discount = 0,
                         Quantity = 34,
-                        CreatedBy = adminId,
-                        LastModifiedBy = adminId,
+                        CreatedById = adminId,
+                        LastModifiedById = adminId,
                     },
                     new Product
                     {
@@ -168,8 +168,8 @@ namespace UriStore.Infrastructure.Context
                         Price = 19000,
                         Discount = 0,
                         Quantity = 146,
-                        CreatedBy = adminId,
-                        LastModifiedBy = adminId,
+                        CreatedById = adminId,
+                        LastModifiedById = adminId,
                     },
                     new Product
                     {
@@ -181,8 +181,8 @@ namespace UriStore.Infrastructure.Context
                         Price = 109000,
                         Discount = 3,
                         Quantity = 214,
-                        CreatedBy = adminId,
-                        LastModifiedBy = adminId,
+                        CreatedById = adminId,
+                        LastModifiedById = adminId,
                     }
                 );
         }

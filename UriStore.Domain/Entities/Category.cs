@@ -18,5 +18,9 @@ namespace UriStore.Domain.Entities
         public bool IsDeleted { get; set; } = false;
         [JsonIgnore]
         public ICollection<Product> Products { get; set; }
+        [ForeignKey(nameof(CreatedById))]
+        public User CreatedBy { get; set; }
+        [ForeignKey(nameof(LastModifiedById))]
+        public User LastModifiedBy { get; set; }
     }
 }

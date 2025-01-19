@@ -23,7 +23,7 @@ namespace UriStore.Application.Features.Product.Commands.CreateProduct
         public string Photo { get; set; }
 
         [JsonIgnore]
-        public Guid CreatedBy { get; set; }
+        public Guid CreatedById { get; set; }
         public int CategoryId { get; set; }
     }
 }

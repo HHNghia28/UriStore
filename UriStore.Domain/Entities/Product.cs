@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UriStore.Domain.Entities
 {
@@ -23,5 +24,9 @@ namespace UriStore.Domain.Entities
         public bool IsDeleted { get; set; } = false;
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        [ForeignKey(nameof(CreatedById))]
+        public User CreatedBy { get; set; }
+        [ForeignKey(nameof(LastModifiedById))]
+        public User LastModifiedBy { get; set; }
     }
 }

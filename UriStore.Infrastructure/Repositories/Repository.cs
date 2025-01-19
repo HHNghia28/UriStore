@@ -1,5 +1,5 @@
 ﻿using UriStore.Application.Interfaces;
-using Identity.Infrastructure.Context;
+using UriStore.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,8 +19,7 @@ namespace UriStore.Infrastructure.Repositories
             _context = context;
             _dbSet = context.Set<T>();
         }
-
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync<TKey>(TKey id)
         {
             return await _dbSet.FindAsync(id);
         }

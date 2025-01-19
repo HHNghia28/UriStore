@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UriStore.API", "UriStore.API\UriStore.API.csproj", "{57205959-A07C-45D5-A77D-9A7005A8C71D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UriStore.Domain", "UriStore.Domain\UriStore.Domain.csproj", "{D171307F-74FD-4036-84F8-736C029E61C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UriStore.Application", "UriStore.Application\UriStore.Application.csproj", "{7E893E94-9C36-4BC9-94D7-F24258673B8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UriStore.Infrastructure", "UriStore.Infrastructure\UriStore.Infrastructure.csproj", "{13C7EA65-06BC-49EA-B597-0392973D6FA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57205959-A07C-45D5-A77D-9A7005A8C71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57205959-A07C-45D5-A77D-9A7005A8C71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57205959-A07C-45D5-A77D-9A7005A8C71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57205959-A07C-45D5-A77D-9A7005A8C71D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D171307F-74FD-4036-84F8-736C029E61C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D171307F-74FD-4036-84F8-736C029E61C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D171307F-74FD-4036-84F8-736C029E61C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D171307F-74FD-4036-84F8-736C029E61C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E893E94-9C36-4BC9-94D7-F24258673B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E893E94-9C36-4BC9-94D7-F24258673B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E893E94-9C36-4BC9-94D7-F24258673B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E893E94-9C36-4BC9-94D7-F24258673B8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C7EA65-06BC-49EA-B597-0392973D6FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C7EA65-06BC-49EA-B597-0392973D6FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C7EA65-06BC-49EA-B597-0392973D6FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C7EA65-06BC-49EA-B597-0392973D6FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -17,6 +17,8 @@ namespace UriStore.Infrastructure.Context
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -183,6 +185,69 @@ namespace UriStore.Infrastructure.Context
                         Quantity = 214,
                         CreatedById = adminId,
                         LastModifiedById = adminId,
+                    }
+                );
+
+            Guid OrderId = Guid.NewGuid();
+
+            builder.Entity<Order>()
+                .HasData(
+                    new Order()
+                    {
+                        Id = OrderId,
+                        FullName = "Huỳnh Hữu Nghĩa",
+                        Phone = "0832474699",
+                        Address = "Cần Thơ",
+                        DiscountFee = 0,
+                        ShippingFee = 32000,
+                        VoucherCode = "NGHIAHH",
+                        VoucherName = "Voucher 28/08",
+                        VoucherValue = 24,
+                        Note = "Giao hàng nhanh",
+                        Status = Domain.Enums.OrderStatus.PENDING,
+                        TotalPrice = 289814,
+                        CreatedById = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f207"),
+                        LastModifiedById = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f207"),
+                    }
+                );
+
+            builder.Entity<OrderDetail>()
+                .HasData(
+                    new OrderDetail
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "PhinDi Cassia",
+                        Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/06_2024/Phindi_Cassia/Phindi_Cassia_Highlands_products_Image1.jpg",
+                        Category = "Coffee",
+                        Price = 55000,
+                        Discount = 0,
+                        Quantity = 2,
+                        OrderId = OrderId,
+                        ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f201")
+                    },
+                    new OrderDetail
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "Phindi Hạt Dẻ Cười",
+                        Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2023/Phindi_Pitaschio.jpg",
+                        Category = "Coffee",
+                        Price = 65000,
+                        Discount = 5,
+                        Quantity = 2,
+                        OrderId = OrderId,
+                        ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f202")
+                    },
+                    new OrderDetail
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "BÁNH TRUNG THU - BÒ XỐT VANG - HIGHLANDS COFFEE",
+                        Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2024/Mooncake/MOONCAKES_PRODUCTSBO-XOT-VANG.png",
+                        Category = "Other",
+                        Price = 109000,
+                        Discount = 3,
+                        Quantity = 1,
+                        OrderId = OrderId,
+                        ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f209")
                     }
                 );
         }

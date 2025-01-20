@@ -10,7 +10,7 @@ namespace UriStore.Application.DTO
 {
     public class OrdersResponse
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         [Required]
         [StringLength(100)]
         public string FullName { get; set; }

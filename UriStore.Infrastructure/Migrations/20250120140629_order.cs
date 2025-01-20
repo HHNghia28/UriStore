@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -17,7 +18,8 @@ namespace UriStore.Infrastructure.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FullName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Phone = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     Address = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
@@ -63,7 +65,7 @@ namespace UriStore.Infrastructure.Migrations
                     Photo = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     Category = table.Column<string>(type: "text", nullable: false),
                     ProductId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uuid", nullable: false)
+                    OrderId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,119 +83,119 @@ namespace UriStore.Infrastructure.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(457), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(460) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7940), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7943) });
 
             migrationBuilder.UpdateData(
                 table: "Categories",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(467), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(467) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7955), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7955) });
 
             migrationBuilder.UpdateData(
                 table: "Categories",
                 keyColumn: "Id",
                 keyValue: 3,
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(468), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(469) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7957), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7957) });
 
             migrationBuilder.UpdateData(
                 table: "Categories",
                 keyColumn: "Id",
                 keyValue: 4,
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(470), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(470) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7958), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7958) });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "Address", "CreatedAt", "CreatedById", "DiscountFee", "FullName", "LastModifiedAt", "LastModifiedById", "Note", "Phone", "ShippingFee", "Status", "TotalPrice", "VoucherCode", "VoucherName", "VoucherValue" },
-                values: new object[] { new Guid("9fda4053-eeac-49a6-92b2-242f745fc19c"), "Cần Thơ", new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(742), new Guid("d87b4b72-609b-4979-b758-7771481da883"), 0, "Huỳnh Hữu Nghĩa", new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(748), new Guid("d87b4b72-609b-4979-b758-7771481da883"), "Giao hàng nhanh", "0832474699", 32000, 0, 289814, "NGHIAHH", "Voucher 28/08", 24 });
+                values: new object[] { 20250120000001L, "Cần Thơ", new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8237), new Guid("d87b4b72-609b-4979-b758-7771481da883"), 0, "Huỳnh Hữu Nghĩa", new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8238), new Guid("d87b4b72-609b-4979-b758-7771481da883"), "Giao hàng nhanh", "0832474699", 32000, 0, 289814, "NGHIAHH", "Voucher 28/08", 24 });
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f201"),
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(506), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(506) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7996), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7997) });
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f202"),
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(646), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(646) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8016), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8016) });
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f203"),
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(650), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(650) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8020), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8020) });
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f204"),
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(653), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(654) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8023), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8023) });
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f205"),
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(656), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(657) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8026), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8026) });
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f206"),
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(659), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(660) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8033), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8033) });
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f208"),
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(662), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(662) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8036), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8037) });
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f209"),
                 columns: new[] { "CreatedAt", "LastModifiedAt" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(665), new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(665) });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8039), new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8040) });
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: new Guid("4b7b0200-70f9-416a-9a3f-29ccab0deec4"),
                 columns: new[] { "CreatedAt", "LastModifiedAt", "PasswordHash" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 114, DateTimeKind.Utc).AddTicks(1315), new DateTime(2025, 1, 20, 13, 26, 37, 114, DateTimeKind.Utc).AddTicks(1318), "$2a$11$apf7sdPrYu8R8raOHaZuGOOtci/rFDMH2Ssk2C2q9hhh9lQ.y75J." });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 26, 771, DateTimeKind.Utc).AddTicks(8390), new DateTime(2025, 1, 20, 14, 6, 26, 771, DateTimeKind.Utc).AddTicks(8398), "$2a$11$e.y4ZcWO6lNnMuAiRKnsu.xO5ScxG//yN/yP2aCsRtPJIgWw.2K5C" });
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: new Guid("a85f272f-353e-4ff6-be2b-a15f1e7c0c47"),
                 columns: new[] { "CreatedAt", "LastModifiedAt", "PasswordHash" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 232, DateTimeKind.Utc).AddTicks(6867), new DateTime(2025, 1, 20, 13, 26, 37, 232, DateTimeKind.Utc).AddTicks(6878), "$2a$11$V6kZbRt1cMi6ayCjJeOnv.u61Cf0MpmtoSKH0q/3I5EmahooSxSXe" });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 26, 889, DateTimeKind.Utc).AddTicks(2777), new DateTime(2025, 1, 20, 14, 6, 26, 889, DateTimeKind.Utc).AddTicks(2781), "$2a$11$ex5V1Lz91leCEqULZR/nbeiZqc/qhYIKdyrBVx6YEr5BXZ.ExEfpi" });
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                 columns: new[] { "CreatedAt", "LastModifiedAt", "PasswordHash" },
-                values: new object[] { new DateTime(2025, 1, 20, 13, 26, 37, 1, DateTimeKind.Utc).AddTicks(5943), new DateTime(2025, 1, 20, 13, 26, 37, 1, DateTimeKind.Utc).AddTicks(5946), "$2a$11$NJu7KPgZ9eW54YyrzUdsHuip/6.pwsoFqJzBt2tdalsb4gBFmliQa" });
+                values: new object[] { new DateTime(2025, 1, 20, 14, 6, 26, 655, DateTimeKind.Utc).AddTicks(2262), new DateTime(2025, 1, 20, 14, 6, 26, 655, DateTimeKind.Utc).AddTicks(2265), "$2a$11$OGk/fwV7gysB.L/QDSJWV.0rWSZvgHOCKRx5I5MIPh3jrIGr6lLLu" });
 
             migrationBuilder.InsertData(
                 table: "OrderDetails",
                 columns: new[] { "Id", "Category", "Discount", "Name", "OrderId", "Photo", "Price", "ProductId", "Quantity" },
                 values: new object[,]
                 {
-                    { new Guid("7b5eb911-df1a-43e3-bbf7-f3d7731f02a0"), "Coffee", 0, "PhinDi Cassia", new Guid("9fda4053-eeac-49a6-92b2-242f745fc19c"), "https://www.highlandscoffee.com.vn/vnt_upload/product/06_2024/Phindi_Cassia/Phindi_Cassia_Highlands_products_Image1.jpg", 55000, new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f201"), 2 },
-                    { new Guid("b7d9bf32-4990-41e3-94ee-8cbebbf11075"), "Coffee", 5, "Phindi Hạt Dẻ Cười", new Guid("9fda4053-eeac-49a6-92b2-242f745fc19c"), "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2023/Phindi_Pitaschio.jpg", 65000, new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f202"), 2 },
-                    { new Guid("fe6ea58a-8305-4c89-b208-ecc6950593fa"), "Other", 3, "BÁNH TRUNG THU - BÒ XỐT VANG - HIGHLANDS COFFEE", new Guid("9fda4053-eeac-49a6-92b2-242f745fc19c"), "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2024/Mooncake/MOONCAKES_PRODUCTSBO-XOT-VANG.png", 109000, new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f209"), 1 }
+                    { new Guid("224a59c1-d620-42ed-b9de-e2e426d4bcfa"), "Other", 3, "BÁNH TRUNG THU - BÒ XỐT VANG - HIGHLANDS COFFEE", 20250120000001L, "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2024/Mooncake/MOONCAKES_PRODUCTSBO-XOT-VANG.png", 109000, new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f209"), 1 },
+                    { new Guid("9c2199de-7e23-4c27-b222-6a8840afd334"), "Coffee", 0, "PhinDi Cassia", 20250120000001L, "https://www.highlandscoffee.com.vn/vnt_upload/product/06_2024/Phindi_Cassia/Phindi_Cassia_Highlands_products_Image1.jpg", 55000, new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f201"), 2 },
+                    { new Guid("f17d969f-7bba-49ce-bc92-c0497ecb3313"), "Coffee", 5, "Phindi Hạt Dẻ Cười", 20250120000001L, "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2023/Phindi_Pitaschio.jpg", 65000, new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f202"), 2 }
                 });
 
             migrationBuilder.CreateIndex(

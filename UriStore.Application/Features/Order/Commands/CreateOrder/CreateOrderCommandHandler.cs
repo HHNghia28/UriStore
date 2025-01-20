@@ -14,7 +14,9 @@ namespace UriStore.Application.Features.Order.Commands.CreateOrder
 
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            Guid orderId = Guid.NewGuid();
+            long lastId = await _orderRepository.GetLastId();
+
+            long orderId = lastId + 1;
 
             var orderDetails = request.Details.Select(o => new Domain.Entities.OrderDetail()
             {

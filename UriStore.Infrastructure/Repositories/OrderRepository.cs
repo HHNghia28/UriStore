@@ -14,11 +14,30 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace UriStore.Infrastructure.Repositories
 {
-    public class OrderRepository(ApplicationDbContext context, ISqlConnectionFactory sqlConnectionFactory) : Repository<Domain.Entities.Order>(context), IOrderRepository
+    public class OrderRepository(ApplicationDbContext context, ISqlConnectionFactory sqlConnectionFactory) 
+        : Repository<Domain.Entities.Order>(context), IOrderRepository
     {
         private readonly ISqlConnectionFactory _sqlConnectionFactory = sqlConnectionFactory;
 
-        public async Task<OrderResponse> GetOrder(Guid id)
+        public async Task<long> GetLastId()
+        {
+            using var connection = _sqlConnectionFactory.GetOpenConnection();
+
+            var currentDate = DateTime.UtcNow.Date;
+
+            const string sqlOrders = @"
+                SELECT ""Id""
+                FROM ""Orders""
+                WHERE ""CreatedAt"" >= @CurrentDate
+                ORDER BY ""Id"" DESC
+                LIMIT 1";
+
+            var orderId = await connection.QuerySingleOrDefaultAsync<long?>(sqlOrders, new { CurrentDate = currentDate });
+
+            return orderId ?? long.Parse(currentDate.ToString("yyyyMMdd") + "000000");
+        }
+
+        public async Task<OrderResponse> GetOrder(long id)
         {
             using var connection = _sqlConnectionFactory.GetOpenConnection();
             const string sqlOrder = @"

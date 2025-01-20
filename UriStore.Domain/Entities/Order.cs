@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UriStore.Domain.Entities
 {
-    public class Order : AuditableBaseEntity<Guid>
+    public class Order : AuditableBaseEntity<long>
     {
         [Required]
         [StringLength(100)]

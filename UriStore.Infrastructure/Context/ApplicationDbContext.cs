@@ -188,13 +188,13 @@ namespace UriStore.Infrastructure.Context
                     }
                 );
 
-            Guid OrderId = Guid.NewGuid();
+            long orderId = long.Parse(DateTime.UtcNow.ToString("yyyyMMdd") + "000001");
 
             builder.Entity<Order>()
                 .HasData(
                     new Order()
                     {
-                        Id = OrderId,
+                        Id = orderId,
                         FullName = "Huỳnh Hữu Nghĩa",
                         Phone = "0832474699",
                         Address = "Cần Thơ",
@@ -222,7 +222,7 @@ namespace UriStore.Infrastructure.Context
                         Price = 55000,
                         Discount = 0,
                         Quantity = 2,
-                        OrderId = OrderId,
+                        OrderId = orderId,
                         ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f201")
                     },
                     new OrderDetail
@@ -234,7 +234,7 @@ namespace UriStore.Infrastructure.Context
                         Price = 65000,
                         Discount = 5,
                         Quantity = 2,
-                        OrderId = OrderId,
+                        OrderId = orderId,
                         ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f202")
                     },
                     new OrderDetail
@@ -246,7 +246,7 @@ namespace UriStore.Infrastructure.Context
                         Price = 109000,
                         Discount = 3,
                         Quantity = 1,
-                        OrderId = OrderId,
+                        OrderId = orderId,
                         ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f209")
                     }
                 );

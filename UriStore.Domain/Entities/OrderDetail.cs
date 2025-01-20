@@ -21,7 +21,7 @@ namespace UriStore.Domain.Entities
         public string Photo { get; set; }
         public string Category { get; set; }
         public Guid ProductId { get; set; }
-        public Guid OrderId { get; set; }
+        public long OrderId { get; set; }
         [ForeignKey(nameof(OrderId))]
         public Order Order { get; set; }
     }

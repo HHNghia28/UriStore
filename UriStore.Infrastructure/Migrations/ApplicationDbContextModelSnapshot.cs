@@ -62,40 +62,40 @@ namespace UriStore.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(457),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7940),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(460),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7943),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "Coffee"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(467),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7955),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(467),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7955),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "Tea"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(468),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7957),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(469),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7957),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "Banh Mi"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(470),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7958),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(470),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7958),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "Other"
                         });
@@ -127,9 +127,11 @@ namespace UriStore.Infrastructure.Migrations
 
             modelBuilder.Entity("UriStore.Domain.Entities.Order", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -197,13 +199,13 @@ namespace UriStore.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9fda4053-eeac-49a6-92b2-242f745fc19c"),
+                            Id = 20250120000001L,
                             Address = "Cần Thơ",
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(742),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8237),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             DiscountFee = 0,
                             FullName = "Huỳnh Hữu Nghĩa",
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(748),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8238),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Note = "Giao hàng nhanh",
                             Phone = "0832474699",
@@ -234,8 +236,8 @@ namespace UriStore.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uuid");
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Photo")
                         .IsRequired()
@@ -260,11 +262,11 @@ namespace UriStore.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7b5eb911-df1a-43e3-bbf7-f3d7731f02a0"),
+                            Id = new Guid("9c2199de-7e23-4c27-b222-6a8840afd334"),
                             Category = "Coffee",
                             Discount = 0,
                             Name = "PhinDi Cassia",
-                            OrderId = new Guid("9fda4053-eeac-49a6-92b2-242f745fc19c"),
+                            OrderId = 20250120000001L,
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/06_2024/Phindi_Cassia/Phindi_Cassia_Highlands_products_Image1.jpg",
                             Price = 55000,
                             ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f201"),
@@ -272,11 +274,11 @@ namespace UriStore.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b7d9bf32-4990-41e3-94ee-8cbebbf11075"),
+                            Id = new Guid("f17d969f-7bba-49ce-bc92-c0497ecb3313"),
                             Category = "Coffee",
                             Discount = 5,
                             Name = "Phindi Hạt Dẻ Cười",
-                            OrderId = new Guid("9fda4053-eeac-49a6-92b2-242f745fc19c"),
+                            OrderId = 20250120000001L,
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2023/Phindi_Pitaschio.jpg",
                             Price = 65000,
                             ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f202"),
@@ -284,11 +286,11 @@ namespace UriStore.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fe6ea58a-8305-4c89-b208-ecc6950593fa"),
+                            Id = new Guid("224a59c1-d620-42ed-b9de-e2e426d4bcfa"),
                             Category = "Other",
                             Discount = 3,
                             Name = "BÁNH TRUNG THU - BÒ XỐT VANG - HIGHLANDS COFFEE",
-                            OrderId = new Guid("9fda4053-eeac-49a6-92b2-242f745fc19c"),
+                            OrderId = 20250120000001L,
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2024/Mooncake/MOONCAKES_PRODUCTSBO-XOT-VANG.png",
                             Price = 109000,
                             ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f209"),
@@ -359,12 +361,12 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f201"),
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(506),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7996),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Description = "Với chất phin êm ái, hương vị cà phê Việt Nam hiện đại kết hợp cùng hương quế nhẹ nhàng và thạch cà phê hấp dẫn.",
                             Discount = 0,
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(506),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(7997),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "PhinDi Cassia",
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/06_2024/Phindi_Cassia/Phindi_Cassia_Highlands_products_Image1.jpg",
@@ -375,12 +377,12 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f202"),
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(646),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8016),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Description = "PhinDi Hạt Dẻ Cười - Cà phê Phin thế hệ mới với chất Phin êm hơn, kết hợp sốt phistiachio mang đến hương vị mới lạ, không thể hấp dẫn hơn!",
                             Discount = 5,
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(646),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8016),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "Phindi Hạt Dẻ Cười",
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2023/Phindi_Pitaschio.jpg",
@@ -391,12 +393,12 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f203"),
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(650),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8020),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Description = "Cà phê Phin thế hệ mới với chất Phin êm hơn, kết hợp cùng Choco ngọt tan mang đến hương vị mới lạ, không thể hấp dẫn hơn!",
                             Discount = 0,
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(650),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8020),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "PhinDi Choco",
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__PHINDI_CHOCO.jpg",
@@ -407,12 +409,12 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f204"),
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(653),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8023),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Description = "Golden Lotus Tea (Only Lotus seed)",
                             Discount = 0,
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(654),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8023),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "Golden Lotus Tea (Only Lotus seed)",
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TSV.jpg",
@@ -423,12 +425,12 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f205"),
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(656),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8026),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Description = "A bold tea base with juicy peaches and chewy peach jelly. Top it with milk if you prefer!",
                             Discount = 10,
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(657),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8026),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "Peach Jelly Tea",
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/06_2023/HLC_New_logo_5.1_Products__TRA_THANH_DAO-09.jpg",
@@ -439,12 +441,12 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f206"),
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(659),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8033),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Description = "Bánh mì que gà tại Highlands Coffee mang đến hương vị đậm đà kết hợp với phô mai beo béo, không chỉ ngon miệng mà còn bổ dưỡng, phù hợp cho bữa ăn nhanh gọn.",
                             Discount = 0,
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(660),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8033),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "Bánh Mì Que (Gà Phô Mai)",
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/11_2024/2024_Food/BMQ_Ga_Pho_Mai.png",
@@ -455,12 +457,12 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f208"),
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(662),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8036),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Description = "Thưởng thức hương vị truyền thống với bánh mì que pate tại Highlands Coffee. Bánh mì giòn tan, kết hợp với pate thơm ngon, tạo nên một món ăn sáng hoàn hảo cho mọi người.",
                             Discount = 0,
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(662),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8037),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "Bánh Mì Que (Pate)",
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/11_2024/2024_Food/BMQ_Pate.png",
@@ -471,12 +473,12 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f209"),
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(665),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8039),
                             CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Description = "Bò xốt vang - Một sự kết hợp mới lạ giữa hương vị thơm ngon của bò xốt vang và bánh trung thu truyền thống, mang đến một vị ngon đầy đặc sắc và độc đáo..\r\n\r\nĐẶT GIAO NGAY HOẶC GỌI 1900 1755\r\n\r\nLƯU Ý:\r\n\r\nBánh chỉ bán ở 6 tỉnh thành: Hồ Chí Minh, Hà Nội, Đà Nẵng, Đồng Nai, Bình Dương và Vũng Tàu (trừ các cửa hàng kiosk và sân bay quốc tế)",
                             Discount = 3,
                             IsDeleted = false,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 349, DateTimeKind.Utc).AddTicks(665),
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 27, 7, DateTimeKind.Utc).AddTicks(8040),
                             LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Name = "BÁNH TRUNG THU - BÒ XỐT VANG - HIGHLANDS COFFEE",
                             Photo = "https://www.highlandscoffee.com.vn/vnt_upload/product/08_2024/Mooncake/MOONCAKES_PRODUCTSBO-XOT-VANG.png",
@@ -601,13 +603,13 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                             Address = "Ninh Kiều, Cần Thơ",
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 1, DateTimeKind.Utc).AddTicks(5943),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 26, 655, DateTimeKind.Utc).AddTicks(2262),
                             Email = "admin@gmail.com",
                             FullName = "admin",
                             IsDeleted = false,
                             IsEmailConfirmed = true,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 1, DateTimeKind.Utc).AddTicks(5946),
-                            PasswordHash = "$2a$11$NJu7KPgZ9eW54YyrzUdsHuip/6.pwsoFqJzBt2tdalsb4gBFmliQa",
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 26, 655, DateTimeKind.Utc).AddTicks(2265),
+                            PasswordHash = "$2a$11$OGk/fwV7gysB.L/QDSJWV.0rWSZvgHOCKRx5I5MIPh3jrIGr6lLLu",
                             Phone = "0987654321",
                             RoleId = 1
                         },
@@ -615,13 +617,13 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("4b7b0200-70f9-416a-9a3f-29ccab0deec4"),
                             Address = "Bình Thủy, Cần Thơ",
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 114, DateTimeKind.Utc).AddTicks(1315),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 26, 771, DateTimeKind.Utc).AddTicks(8390),
                             Email = "staff@gmail.com",
                             FullName = "staff",
                             IsDeleted = false,
                             IsEmailConfirmed = true,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 114, DateTimeKind.Utc).AddTicks(1318),
-                            PasswordHash = "$2a$11$apf7sdPrYu8R8raOHaZuGOOtci/rFDMH2Ssk2C2q9hhh9lQ.y75J.",
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 26, 771, DateTimeKind.Utc).AddTicks(8398),
+                            PasswordHash = "$2a$11$e.y4ZcWO6lNnMuAiRKnsu.xO5ScxG//yN/yP2aCsRtPJIgWw.2K5C",
                             Phone = "0987654123",
                             RoleId = 2
                         },
@@ -629,13 +631,13 @@ namespace UriStore.Infrastructure.Migrations
                         {
                             Id = new Guid("a85f272f-353e-4ff6-be2b-a15f1e7c0c47"),
                             Address = "Phong Điền, Cần Thơ",
-                            CreatedAt = new DateTime(2025, 1, 20, 13, 26, 37, 232, DateTimeKind.Utc).AddTicks(6867),
+                            CreatedAt = new DateTime(2025, 1, 20, 14, 6, 26, 889, DateTimeKind.Utc).AddTicks(2777),
                             Email = "user@gmail.com",
                             FullName = "user",
                             IsDeleted = false,
                             IsEmailConfirmed = true,
-                            LastModifiedAt = new DateTime(2025, 1, 20, 13, 26, 37, 232, DateTimeKind.Utc).AddTicks(6878),
-                            PasswordHash = "$2a$11$V6kZbRt1cMi6ayCjJeOnv.u61Cf0MpmtoSKH0q/3I5EmahooSxSXe",
+                            LastModifiedAt = new DateTime(2025, 1, 20, 14, 6, 26, 889, DateTimeKind.Utc).AddTicks(2781),
+                            PasswordHash = "$2a$11$ex5V1Lz91leCEqULZR/nbeiZqc/qhYIKdyrBVx6YEr5BXZ.ExEfpi",
                             Phone = "0987654312",
                             RoleId = 3
                         });

@@ -27,7 +27,7 @@ namespace Order.API.Endpoints.V1.Orders
             group1.MapGet("user", GetAllByUserId);
             group1.MapPost(string.Empty, Create);
             group1.MapPut("{id}", Update);
-            group1.MapPut("cancel/{id}", Cancel);
+            group1.MapDelete("cancel/{id}", Cancel);
         }
 
         public async Task<IResult> GetAll(ISender sender, [FromQuery] int pageSize = 10, [FromQuery] int pageNumber = 1)
@@ -35,7 +35,7 @@ namespace Order.API.Endpoints.V1.Orders
             return Results.Ok(await sender.Send(new GetOrdersQuery { PageNumber = pageNumber, PageSize = pageSize }));
         }
 
-        public async Task<IResult> Get(ISender sender, Guid id)
+        public async Task<IResult> Get(ISender sender, long id)
         {
             return Results.Ok(await sender.Send(new GetOrderQuery { Id = id }));
         }
@@ -52,7 +52,7 @@ namespace Order.API.Endpoints.V1.Orders
             return Results.Ok("Create order successful");
         }
 
-        public async Task<IResult> Update(ISender sender, Guid id, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] UpdateOrderCommand request)
+        public async Task<IResult> Update(ISender sender, long id, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] UpdateOrderCommand request)
         {
             request.Id = id;
             request.LastModifiedBy = userId;
@@ -60,7 +60,7 @@ namespace Order.API.Endpoints.V1.Orders
             return Results.Ok("Update order successful");
         }
 
-        public async Task<IResult> Cancel(ISender sender, Guid id, [FromHeader(Name = "X-User-Id")] Guid userId)
+        public async Task<IResult> Cancel(ISender sender, long id, [FromHeader(Name = "X-User-Id")] Guid userId)
         {
             await sender.Send(new CancelOrderCommand { Id = id, LastModifiedBy = userId });
             return Results.Ok("Cancel order successful");

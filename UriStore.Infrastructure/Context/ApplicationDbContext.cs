@@ -206,8 +206,8 @@ namespace UriStore.Infrastructure.Context
                         Note = "Giao hàng nhanh",
                         Status = Domain.Enums.OrderStatus.PENDING,
                         TotalPrice = 289814,
-                        CreatedById = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f207"),
-                        LastModifiedById = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f207"),
+                        CreatedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
+                        LastModifiedById = new Guid("d87b4b72-609b-4979-b758-7771481da883"),
                     }
                 );
 

@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UriStore.Domain.Entities
 {
@@ -34,5 +35,9 @@ namespace UriStore.Domain.Entities
         public int TotalPrice { get; set; } = 0;
         public OrderStatus Status { get; set; } = OrderStatus.PENDING;
         public ICollection<OrderDetail> Details { get; set; }
+        [ForeignKey(nameof(CreatedById))]
+        public User CreatedBy { get; set; }
+        [ForeignKey(nameof(LastModifiedById))]
+        public User LastModifiedBy { get; set; }
     }
 }

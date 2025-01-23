@@ -19,6 +19,7 @@ namespace UriStore.Infrastructure.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -250,6 +251,45 @@ namespace UriStore.Infrastructure.Context
                         ProductId = new Guid("868e6f06-9728-48c3-a5d7-5d1aadf4f209")
                     }
                 );
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e =>
+                    (e.Entity is Order || e.Entity is Product || e.Entity is Category || e.Entity is Payment) &&
+                    (e.State == EntityState.Added || e.State == EntityState.Modified));
+
+            foreach (var entry in entries)
+            {
+                if (entry.Entity is Order order)
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        order.CreatedAt = DateTime.UtcNow;
+                    }
+                    order.LastModifiedAt = DateTime.UtcNow;
+                }
+                if (entry.Entity is Product product)
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        product.CreatedAt = DateTime.UtcNow;
+                    }
+                    product.LastModifiedAt = DateTime.UtcNow;
+                }
+                if (entry.Entity is Category category)
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        category.CreatedAt = DateTime.UtcNow;
+                    }
+                    category.LastModifiedAt = DateTime.UtcNow;
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

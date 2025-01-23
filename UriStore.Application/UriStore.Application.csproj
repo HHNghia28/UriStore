@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UriStore.Domain\UriStore.Domain.csproj" />
+    <ProjectReference Include="..\UriStore.PayOS\UriStore.PayOS.csproj" />
   </ItemGroup>
 
 </Project>

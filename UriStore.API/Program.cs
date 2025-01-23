@@ -22,6 +22,8 @@ using UriStore.Infrastructure.EmailHandler;
 using Carter;
 using Asp.Versioning;
 using UriStore.Application.Features.Users.Queries.GetUsers;
+using UriStore.PayOS.Config;
+using UriStore.PayOS.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -96,9 +98,14 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IPayOSService, PayOSService>();
+
+builder.Services.Configure<PayOSConfig>(
+    builder.Configuration.GetSection(PayOSConfig.ConfigName));
 
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddScoped<IEmailSender, EmailSender>();

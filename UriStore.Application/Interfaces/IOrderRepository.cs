@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UriStore.Domain.Entities;
 
 namespace UriStore.Application.Interfaces
 {
@@ -12,6 +13,7 @@ namespace UriStore.Application.Interfaces
     {
         Task<PagedResponse<List<OrdersResponse>>> GetOrders(PagedRequest request);
         Task<PagedResponse<List<OrdersResponse>>> GetOrdersByUserId(PagedRequest request, Guid userId);
+        Task<List<Order>> GetExpiredOrders();
         Task<OrderResponse> GetOrder(long id);
         Task<long> GetLastId();
     }

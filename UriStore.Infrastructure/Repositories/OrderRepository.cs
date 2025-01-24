@@ -10,14 +10,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using UriStore.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace UriStore.Infrastructure.Repositories
 {
     public class OrderRepository(ApplicationDbContext context, ISqlConnectionFactory sqlConnectionFactory) 
-        : Repository<Domain.Entities.Order>(context), IOrderRepository
+        : Repository<Order>(context), IOrderRepository
     {
         private readonly ISqlConnectionFactory _sqlConnectionFactory = sqlConnectionFactory;
+        private readonly ApplicationDbContext _context = context;
+
+        public async Task<List<Order>> GetExpiredOrders()
+        {
+            return await _context.Orders
+                .Include(o => o.Details)
+                .ThenInclude(o => o.Product)
+                .Where(o => o.Status == Domain.Enums.OrderStatus.PENDING 
+                && o.LastModifiedAt.HasValue && o.LastModifiedAt.Value.AddMinutes(5) < DateTime.UtcNow)
+                .ToListAsync();
+        }
 
         public async Task<long> GetLastId()
         {

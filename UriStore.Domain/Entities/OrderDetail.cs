@@ -16,6 +16,7 @@ namespace UriStore.Domain.Entities
         public string Name { get; set; }
         public int Price { get; set; } = 0;
         public int Discount { get; set; } = 0;
+        [MinLength(1)]
         public int Quantity { get; set; } = 0;
         [StringLength(500)]
         public string Photo { get; set; }

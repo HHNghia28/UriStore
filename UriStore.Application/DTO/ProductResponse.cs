@@ -13,7 +13,7 @@ namespace UriStore.Application.DTO
         public string Description { get; set; }
         public int Price { get; set; } = 0;
         public int Discount { get; set; } = 0;
-        public int Quantity { get; set; } = 0;
+        public int Stock { get; set; } = 0;
         public string Photo { get; set; }
         public bool IsDeleted { get; set; } = false;
 

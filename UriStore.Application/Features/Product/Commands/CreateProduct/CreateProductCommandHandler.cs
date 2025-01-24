@@ -20,7 +20,7 @@ namespace UriStore.Application.Features.Product.Commands.CreateProduct
                 Description = request.Description,
                 Price = request.Price,
                 Discount = request.Discount,
-                Quantity = request.Quantity,
+                Stock = request.Stock,
                 Photo = request.Photo,
                 CreatedById = request.CreatedById,
                 LastModifiedById = request.CreatedById,

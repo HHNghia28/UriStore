@@ -17,14 +17,14 @@ namespace UriStore.Application.Features.Product.Commands.UpdateProduct
         {
             var product = await _productRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Product not found");
 
-            product.Name = request.Name;
-            product.Description = request.Description;
-            product.Price = request.Price;
-            product.Discount = request.Discount;
-            product.Quantity = request.Quantity;
-            product.Photo = request.Photo;
-            product.CategoryId = request.CategoryId;
-            product.LastModifiedById = request.LastModifiedById;
+            product.Name = request.Name ?? product.Name;
+            product.Description = request.Description ?? product.Description;
+            product.Price = request.Price ?? product.Price;
+            product.Discount = request.Discount ?? product.Discount;
+            product.Stock = request.Stock ?? product.Stock;
+            product.Photo = request.Photo ?? product.Photo;
+            product.CategoryId = request.CategoryId ?? product.CategoryId;
+            product.LastModifiedById = request.LastModifiedById ?? product.LastModifiedById;
 
             await _productRepository.UpdateAsync(product);
             await _productRepository.SaveAsync();

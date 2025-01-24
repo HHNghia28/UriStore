@@ -5,31 +5,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UriStore.Application.Exceptions;
+using UriStore.Domain.Entities;
 
 namespace UriStore.Application.Features.Order.Commands.CreateOrder
 {
-    public class CreateOrderCommandHandler(IOrderRepository orderRepository) : IRequestHandler<CreateOrderCommand>
+    public class CreateOrderCommandHandler(IOrderRepository orderRepository, IProductRepository productRepository) 
+        : IRequestHandler<CreateOrderCommand>
     {
         private readonly IOrderRepository _orderRepository = orderRepository;
+        private readonly IProductRepository _productRepository = productRepository;
 
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
+            List<OrderDetail> orderDetails = [];
             long lastId = await _orderRepository.GetLastId();
 
             long orderId = lastId + 1;
 
-            var orderDetails = request.Details.Select(o => new Domain.Entities.OrderDetail()
+            foreach (var item in request.Details)
             {
-                Id = Guid.NewGuid(),
-                Discount = o.Discount,
-                Name = o.Name,
-                OrderId = orderId,
-                Photo = o.Photo,
-                Price = o.Price,
-                ProductId = o.ProductId,
-                Quantity = o.Quantity,
-                Category = o.Category,
-            }).ToList();
+                var product = await _productRepository.GetByIdAsync(item.ProductId) ?? throw new NotFoundException("Product not found");
+
+                if (product.IsDeleted || product.Stock < item.Quantity)
+                {
+                    throw new InvalidOperationException("Product '" + product.Name + "' not enough");
+                }
+
+                product.Stock -= item.Quantity;
+                await _productRepository.UpdateAsync(product);
+
+                orderDetails.Add(new OrderDetail()
+                {
+                    Id = Guid.NewGuid(),
+                    Discount = item.Discount,
+                    Name = item.Name,
+                    OrderId = orderId,
+                    Photo = item.Photo,
+                    Price = item.Price,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Category = item.Category,
+                });
+            }
 
             var totalPrice = orderDetails.Sum(d => (d.Price * (1 - (d.Discount / 100))) * d.Quantity) * (1 - (request.VoucherValue / 100)) + request.ShippingFee - request.DiscountFee;
 

@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Category.Queries.GetCategories
 {
-    public class GetCategoriesQueryHandler(ICategoryRepository categoryRepository) : IRequestHandler<GetCategoriesQuery, List<CategoryResponse>>
+    public class GetCategoriesQueryHandler(ICategoryRepository _categoryRepository) : IRequestHandler<GetCategoriesQuery, List<CategoryResponse>>
     {
-        private readonly ICategoryRepository _categoryRepository = categoryRepository;
-
         public async Task<List<CategoryResponse>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
             return await _categoryRepository.GetCategories();

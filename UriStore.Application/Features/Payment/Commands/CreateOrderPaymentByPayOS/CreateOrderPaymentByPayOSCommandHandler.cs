@@ -11,13 +11,10 @@ using UriStore.PayOS.Services;
 
 namespace UriStore.Application.Features.Payment.Commands.CreatePaymentOrder
 {
-    public class CreateOrderPaymentByPayOSCommandHandler(IPaymentRepository paymentRepository, IOrderRepository orderRepository, IPayOSService payOSService)
+    public class CreateOrderPaymentByPayOSCommandHandler(IPaymentRepository _paymentRepository, 
+                IOrderRepository _orderRepository, IPayOSService _payOSService)
                 : IRequestHandler<CreateOrderPaymentByPayOSCommand, string>
     {
-        private readonly IPaymentRepository _paymentRepository = paymentRepository;
-        private readonly IOrderRepository _orderRepository = orderRepository;
-        private readonly IPayOSService _payOSService = payOSService;
-
         public async Task<string> Handle(CreateOrderPaymentByPayOSCommand request, CancellationToken cancellationToken)
         {
             string paymentLink = "";

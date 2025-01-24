@@ -12,12 +12,9 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Auth.Commands.ForgotPassword
 {
-    public class ForgotPasswordCommandHandler(IUserRepository userRepository, IEmailSender emailSender, IConfiguration configuration) : IRequestHandler<ForgotPasswordCommand>
+    public class ForgotPasswordCommandHandler(IUserRepository _userRepository, IEmailSender _emailSender, IConfiguration _configuration) 
+        : IRequestHandler<ForgotPasswordCommand>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-        private readonly IEmailSender _emailSender = emailSender;
-        private readonly IConfiguration _configuration = configuration;
-
         public async Task Handle(ForgotPasswordCommand request, CancellationToken cancellationToken)
         {
             var existingUser = await _userRepository.GetByEmailAsync(request.Email);

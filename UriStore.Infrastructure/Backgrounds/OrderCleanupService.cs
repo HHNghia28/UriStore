@@ -7,10 +7,8 @@ using UriStore.Application.Interfaces;
 
 namespace UriStore.Infrastructure.Backgrounds
 {
-    public class OrderCleanupService(IServiceScopeFactory scopeFactory) : BackgroundService
+    public class OrderCleanupService(IServiceScopeFactory _scopeFactory) : BackgroundService
     {
-        private readonly IServiceScopeFactory _scopeFactory = scopeFactory;
-
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)

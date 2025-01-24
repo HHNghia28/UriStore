@@ -11,10 +11,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Product.Queries.GetProducts
 {
-    public class GetProductsQueryHandler(IProductRepository productRepository) : IRequestHandler<GetProductsQuery, PagedResponse<List<ProductsResponse>>>
+    public class GetProductsQueryHandler(IProductRepository _productRepository) : IRequestHandler<GetProductsQuery, PagedResponse<List<ProductsResponse>>>
     {
-        private readonly IProductRepository _productRepository = productRepository;
-
         public async Task<PagedResponse<List<ProductsResponse>>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
             return await _productRepository.GetProducts(new PagedRequest { PageNumber = request.PageNumber, PageSize = request.PageSize });

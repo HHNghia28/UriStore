@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Users.Queries.GetUser
 {
-    public class GetUserQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUserQuery, UserResponse>
+    public class GetUserQueryHandler(IUserRepository _userRepository) : IRequestHandler<GetUserQuery, UserResponse>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-
         public async Task<UserResponse> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
             return await _userRepository.GetUser(request.Id);

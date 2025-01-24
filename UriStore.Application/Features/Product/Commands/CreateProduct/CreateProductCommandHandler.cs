@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Product.Commands.CreateProduct
 {
-    public class CreateProductCommandHandler(IProductRepository productRepository) : IRequestHandler<CreateProductCommand>
+    public class CreateProductCommandHandler(IProductRepository _productRepository) : IRequestHandler<CreateProductCommand>
     {
-        private readonly IProductRepository _productRepository = productRepository;
-
         public async Task Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             await _productRepository.AddAsync(new Domain.Entities.Product

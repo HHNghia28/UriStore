@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Order.Commands.CancelOrder
 {
-    public class CancelOrderCommandHandler(IOrderRepository orderRepository) : IRequestHandler<CancelOrderCommand>
+    public class CancelOrderCommandHandler(IOrderRepository _orderRepository) : IRequestHandler<CancelOrderCommand>
     {
-        private readonly IOrderRepository _orderRepository = orderRepository;
-
         public async Task Handle(CancelOrderCommand request, CancellationToken cancellationToken)
         {
             var order = await _orderRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Order not found");

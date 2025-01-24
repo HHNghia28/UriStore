@@ -12,10 +12,9 @@ using System.Threading.Tasks;
 
 namespace UriStore.Infrastructure.Repositories
 {
-    public class ProductRepository(ApplicationDbContext context, ISqlConnectionFactory sqlConnectionFactory) : Repository<Domain.Entities.Product>(context), IProductRepository
+    public class ProductRepository(ApplicationDbContext context, ISqlConnectionFactory _sqlConnectionFactory) 
+        : Repository<Domain.Entities.Product>(context), IProductRepository
     {
-        private readonly ISqlConnectionFactory _sqlConnectionFactory = sqlConnectionFactory;
-
         public async Task<ProductResponse> GetProduct(Guid id)
         {
             using var connect = _sqlConnectionFactory.GetOpenConnection();

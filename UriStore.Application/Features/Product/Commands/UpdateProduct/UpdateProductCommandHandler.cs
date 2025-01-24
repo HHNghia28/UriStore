@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Product.Commands.UpdateProduct
 {
-    public class UpdateProductCommandHandler(IProductRepository productRepository) : IRequestHandler<UpdateProductCommand>
+    public class UpdateProductCommandHandler(IProductRepository _productRepository) : IRequestHandler<UpdateProductCommand>
     {
-        private readonly IProductRepository _productRepository = productRepository;
-
         public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Product not found");

@@ -10,11 +10,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Auth.Commands.AccessToken
 {
-    public class AccessTokenCommandHandler(IUserRepository userRepository, ITokenService tokenService) : IRequestHandler<AccessTokenCommand, LoginResponse>
+    public class AccessTokenCommandHandler(IUserRepository _userRepository, ITokenService _tokenService) : IRequestHandler<AccessTokenCommand, LoginResponse>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-        private readonly ITokenService _tokenService = tokenService;
-
         public async Task<LoginResponse> Handle(AccessTokenCommand command, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetUserByRefreshToken(command.RefreshToken);

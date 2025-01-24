@@ -11,13 +11,10 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Auth.Commands.RegisterUser
 {
-    public class RegisterUserCommandHandler(IUserRepository userRepository, IPasswordHasher passwordHasher, IEmailSender emailSender, IConfiguration configuration) : IRequestHandler<RegisterUserCommand>
+    public class RegisterUserCommandHandler(IUserRepository _userRepository, IPasswordHasher _passwordHasher, IEmailSender _emailSender,
+        IConfiguration _configuration) 
+        : IRequestHandler<RegisterUserCommand>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-        private readonly IPasswordHasher _passwordHasher = passwordHasher;
-        private readonly IEmailSender _emailSender = emailSender;
-        private readonly IConfiguration _configuration = configuration;
-
         async Task IRequestHandler<RegisterUserCommand>.Handle(RegisterUserCommand command, CancellationToken cancellationToken)
         {
             var existingUser = await _userRepository.GetByEmailAsync(command.Email);

@@ -13,15 +13,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UriStore.Infrastructure.Context;
 
 namespace UriStore.Infrastructure.Repositories
 {
-    public class UserRepository(ApplicationDbContext context, ISqlConnectionFactory connectionFactory) : Repository<User>(context), IUserRepository
+    public class UserRepository(ApplicationDbContext _context, ISqlConnectionFactory _sqlConnectionFactory)
+        : Repository<User>(_context), IUserRepository
     {
-        private readonly ApplicationDbContext _context = context;
-        private readonly ISqlConnectionFactory _connectionFactory = connectionFactory;
-
         public async Task<bool> ChangePassword(Guid userId, string newHashPassword)
         {
             var user = await _context.Users.FindAsync(userId);
@@ -130,7 +127,7 @@ namespace UriStore.Infrastructure.Repositories
 
         public async Task<PagedResponse<List<UserListResponse>>> GetUsers(PagedRequest request)
         {
-            using (var connection = _connectionFactory.GetOpenConnection())
+            using (var connection = _sqlConnectionFactory.GetOpenConnection())
             {
                 const string sqlUsers = @"
                     SELECT 
@@ -167,7 +164,7 @@ namespace UriStore.Infrastructure.Repositories
 
         public async Task<UserResponse> GetUser(Guid id)
         {
-            using (var connection = _connectionFactory.GetOpenConnection())
+            using (var connection = _sqlConnectionFactory.GetOpenConnection())
             {
                 const string sqlUsers = @"
                     SELECT 

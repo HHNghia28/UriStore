@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace UriStore.Infrastructure.Context
 {
-    public class SqlConnectionFactory(IConfiguration configuration) : ISqlConnectionFactory, IDisposable
+    public class SqlConnectionFactory(IConfiguration _configuration) : ISqlConnectionFactory, IDisposable
     {
-        private readonly string _connectionString = configuration.GetConnectionString("DefaultConnection");
+        private readonly string _connectionString = _configuration.GetConnectionString("DefaultConnection");
         private IDbConnection _connection;
 
         public IDbConnection GetOpenConnection()

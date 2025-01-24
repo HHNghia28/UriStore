@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Auth.Commands.ChangeDeleteUser
 {
-    public class ChangeDeletedUserCommandHandler(IUserRepository userRepository) : IRequestHandler<ChangeDeletedUserCommand>
+    public class ChangeDeletedUserCommandHandler(IUserRepository _userRepository) : IRequestHandler<ChangeDeletedUserCommand>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-
         public async Task Handle(ChangeDeletedUserCommand request, CancellationToken cancellationToken)
         {
             await _userRepository.ChangeIsDeletedUser(request.UserId, request.IsDeleted);

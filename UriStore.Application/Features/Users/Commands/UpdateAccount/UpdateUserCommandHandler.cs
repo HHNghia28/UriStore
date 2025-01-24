@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Users.Commands.UpdateAccount
 {
-    public class UpdateUserCommandHandler(IUserRepository userRepository) : IRequestHandler<UpdateUserCommand>
+    public class UpdateUserCommandHandler(IUserRepository _userRepository) : IRequestHandler<UpdateUserCommand>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-
         public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             await _userRepository.UpdateUser(new User

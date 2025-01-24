@@ -9,16 +9,10 @@ using System.Threading.Tasks;
 
 namespace UriStore.Infrastructure.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T>(ApplicationDbContext _context) : IRepository<T> where T : class
     {
-        private readonly ApplicationDbContext _context;
-        private DbSet<T> _dbSet;
+        private readonly DbSet<T> _dbSet = _context.Set<T>();
 
-        public Repository(ApplicationDbContext context)
-        {
-            _context = context;
-            _dbSet = context.Set<T>();
-        }
         public async Task<T> GetByIdAsync<TKey>(TKey id)
         {
             return await _dbSet.FindAsync(id);

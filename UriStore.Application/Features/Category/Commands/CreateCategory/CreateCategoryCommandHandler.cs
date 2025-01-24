@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Category.Commands.CreateCategory
 {
-    public class CreateCategoryCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<CreateCategoryCommand>
+    public class CreateCategoryCommandHandler(ICategoryRepository _categoryRepository) : IRequestHandler<CreateCategoryCommand>
     {
-        private readonly ICategoryRepository _categoryRepository = categoryRepository;
-
         public async Task Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             await _categoryRepository.AddAsync(new Domain.Entities.Category

@@ -13,10 +13,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Infrastructure.Services
 {
-    public class TokenService(IConfiguration configuration) : ITokenService
+    public class TokenService(IConfiguration _configuration) : ITokenService
     {
-        private readonly IConfiguration _configuration = configuration;
-
         public string GenerateJwtToken(User user)
         {
             var claims = new[]

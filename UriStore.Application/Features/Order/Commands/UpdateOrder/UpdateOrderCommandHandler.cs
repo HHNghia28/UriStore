@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Order.Commands.UpdateOrder
 {
-    public class UpdateOrderCommandHandler(IOrderRepository orderRepository) : IRequestHandler<UpdateOrderCommand>
+    public class UpdateOrderCommandHandler(IOrderRepository _orderRepository) : IRequestHandler<UpdateOrderCommand>
     {
-        private readonly IOrderRepository _orderRepository = orderRepository;
-
         public async Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
             var order = await _orderRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Order not found");

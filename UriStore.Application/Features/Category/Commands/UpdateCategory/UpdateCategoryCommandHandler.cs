@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Category.Commands.UpdateCategory
 {
-    public class UpdateCategoryCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<UpdateCategoryCommand>
+    public class UpdateCategoryCommandHandler(ICategoryRepository _categoryRepository) : IRequestHandler<UpdateCategoryCommand>
     {
-        private readonly ICategoryRepository _categoryRepository = categoryRepository;
-
         public async Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = await _categoryRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException("Category not found");

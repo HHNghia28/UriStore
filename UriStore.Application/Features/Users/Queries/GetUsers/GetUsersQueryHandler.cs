@@ -11,10 +11,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Users.Queries.GetUsers
 {
-    public class GetUsersQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUsersQuery, PagedResponse<List<UserListResponse>>>
+    public class GetUsersQueryHandler(IUserRepository _userRepository) : IRequestHandler<GetUsersQuery, PagedResponse<List<UserListResponse>>>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-
         public async Task<PagedResponse<List<UserListResponse>>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
             return await _userRepository.GetUsers(new PagedRequest

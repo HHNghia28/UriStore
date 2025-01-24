@@ -15,12 +15,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UriStore.Infrastructure.Repositories
 {
-    public class OrderRepository(ApplicationDbContext context, ISqlConnectionFactory sqlConnectionFactory) 
-        : Repository<Order>(context), IOrderRepository
+    public class OrderRepository(ApplicationDbContext _context, ISqlConnectionFactory _sqlConnectionFactory) 
+        : Repository<Order>(_context), IOrderRepository
     {
-        private readonly ISqlConnectionFactory _sqlConnectionFactory = sqlConnectionFactory;
-        private readonly ApplicationDbContext _context = context;
-
         public async Task<List<Order>> GetExpiredOrders()
         {
             return await _context.Orders

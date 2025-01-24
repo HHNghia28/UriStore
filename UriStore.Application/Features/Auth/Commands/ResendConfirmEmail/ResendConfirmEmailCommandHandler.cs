@@ -11,13 +11,9 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Auth.Commands.ResendEmail
 {
-    public class ResendConfirmEmailCommandHandler(IUserRepository userRepository, IPasswordHasher passwordHasher, IEmailSender emailSender, IConfiguration configuration) : IRequestHandler<ResendConfirmEmailCommand>
+    public class ResendConfirmEmailCommandHandler(IUserRepository _userRepository, IEmailSender _emailSender, IConfiguration _configuration) 
+        : IRequestHandler<ResendConfirmEmailCommand>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-        private readonly IPasswordHasher _passwordHasher = passwordHasher;
-        private readonly IEmailSender _emailSender = emailSender;
-        private readonly IConfiguration _configuration = configuration;
-
         async Task IRequestHandler<ResendConfirmEmailCommand>.Handle(ResendConfirmEmailCommand command, CancellationToken cancellationToken)
         {
             var existingUser = await _userRepository.GetByEmailAsync(command.Email);

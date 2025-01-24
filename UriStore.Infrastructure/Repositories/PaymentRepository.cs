@@ -13,12 +13,9 @@ using UriStore.Infrastructure.Context;
 
 namespace UriStore.Infrastructure.Repositories
 {
-    public class PaymentRepository(ApplicationDbContext context, ISqlConnectionFactory sqlConnectionFactory) 
-        : Repository<Payment>(context), IPaymentRepository
+    public class PaymentRepository(ApplicationDbContext _context, ISqlConnectionFactory _sqlConnectionFactory) 
+        : Repository<Payment>(_context), IPaymentRepository
     {
-        private readonly ISqlConnectionFactory _sqlConnectionFactory = sqlConnectionFactory;
-        private readonly ApplicationDbContext _context = context;
-
         public async Task<List<Payment>> GetExpiredsPayments()
         {
             return await _context.Payments.Where(p => p.Status == Domain.Enums.PaymentStatus.PENDING

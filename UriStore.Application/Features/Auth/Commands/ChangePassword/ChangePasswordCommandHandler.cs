@@ -10,16 +10,15 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Auth.Commands.ChangePassword
 {
-    public class ChangePasswordCommandHandler(IUserRepository userRepository, IPasswordHasher passwordHasher) : IRequestHandler<ChangePasswordCommand>
+    public class ChangePasswordCommandHandler(IUserRepository _userRepository, IPasswordHasher _passwordHasher) 
+        : IRequestHandler<ChangePasswordCommand>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-        private readonly IPasswordHasher _passwordHasher = passwordHasher;
-
         public async Task Handle(ChangePasswordCommand command, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetByEmailAsync(command.Email);
 
-            if (user == null || !_passwordHasher.VerifyPassword(command.OldPassword, user.PasswordHash)) throw new InvalidCredentialsException("Invalid credentials");
+            if (user == null || !_passwordHasher.VerifyPassword(command.OldPassword, user.PasswordHash)) 
+                throw new InvalidCredentialsException("Invalid credentials");
 
             if (!user.IsEmailConfirmed) throw new InvalidCredentialsException("Please confirm email");
 

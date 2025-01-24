@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Auth.Commands.ConfirmEmail
 {
-    public class ConfirmEmailCommandHandler(IUserRepository userRepository) : IRequestHandler<ConfirmEmailCommand, bool>
+    public class ConfirmEmailCommandHandler(IUserRepository _userRepository) : IRequestHandler<ConfirmEmailCommand, bool>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-
         async Task<bool> IRequestHandler<ConfirmEmailCommand, bool>.Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
         {
             var confirm = await _userRepository.IsVerifyCode(request.UserId, request.Code);

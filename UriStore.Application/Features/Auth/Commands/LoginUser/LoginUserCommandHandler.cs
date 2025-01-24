@@ -11,12 +11,9 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Auth.Commands.LoginUser
 {
-    public class LoginUserCommandHandler(IUserRepository userRepository, IPasswordHasher passwordHasher, ITokenService tokenService) : IRequestHandler<LoginUserCommand, LoginResponse>
+    public class LoginUserCommandHandler(IUserRepository _userRepository, IPasswordHasher _passwordHasher, ITokenService _tokenService) 
+        : IRequestHandler<LoginUserCommand, LoginResponse>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-        private readonly IPasswordHasher _passwordHasher = passwordHasher;
-        private readonly ITokenService _tokenService = tokenService;
-
         public async Task<LoginResponse> Handle(LoginUserCommand command, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetByEmailAsync(command.Email);

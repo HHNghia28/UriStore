@@ -10,12 +10,9 @@ using UriStore.Domain.Entities;
 
 namespace UriStore.Application.Features.Order.Commands.CreateOrder
 {
-    public class CreateOrderCommandHandler(IOrderRepository orderRepository, IProductRepository productRepository) 
+    public class CreateOrderCommandHandler(IOrderRepository _orderRepository, IProductRepository _productRepository) 
         : IRequestHandler<CreateOrderCommand>
     {
-        private readonly IOrderRepository _orderRepository = orderRepository;
-        private readonly IProductRepository _productRepository = productRepository;
-
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             List<OrderDetail> orderDetails = [];

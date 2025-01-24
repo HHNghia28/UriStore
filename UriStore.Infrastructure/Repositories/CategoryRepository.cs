@@ -11,10 +11,9 @@ using Dapper;
 
 namespace UriStore.Infrastructure.Repositories
 {
-    public class CategoryRepository(ApplicationDbContext context, ISqlConnectionFactory sqlConnectionFactory) : Repository<Category>(context), ICategoryRepository
+    public class CategoryRepository(ApplicationDbContext _context, ISqlConnectionFactory _sqlConnectionFactory) 
+        : Repository<Category>(_context), ICategoryRepository
     {
-        private readonly ISqlConnectionFactory _sqlConnectionFactory = sqlConnectionFactory;
-
         public async Task<List<CategoryResponse>> GetCategories()
         {
             var connection = _sqlConnectionFactory.GetOpenConnection();

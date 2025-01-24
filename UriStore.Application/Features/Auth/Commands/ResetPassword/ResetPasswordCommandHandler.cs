@@ -9,11 +9,9 @@ using System.Threading.Tasks;
 
 namespace UriStore.Application.Features.Auth.Commands.ResetPassword
 {
-    public class ResetPasswordCommandHandler(IUserRepository userRepository, IPasswordHasher passwordHasher) : IRequestHandler<ResetPasswordCommand>
+    public class ResetPasswordCommandHandler(IUserRepository _userRepository, IPasswordHasher _passwordHasher) 
+        : IRequestHandler<ResetPasswordCommand>
     {
-        private readonly IUserRepository _userRepository = userRepository;
-        private readonly IPasswordHasher _passwordHasher = passwordHasher;
-
         public async Task Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
         {
             var confirm = await _userRepository.IsVerifyCode(request.UserId, request.Code);

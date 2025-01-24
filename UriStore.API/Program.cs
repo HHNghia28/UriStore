@@ -24,7 +24,7 @@ using Asp.Versioning;
 using UriStore.Application.Features.Users.Queries.GetUsers;
 using UriStore.PayOS.Config;
 using UriStore.PayOS.Services;
-using UriStore.Infrastructure.BackgroundServices;
+using UriStore.Infrastructure.Backgrounds;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -93,6 +93,7 @@ builder.Services.AddMediatR(options =>
 });
 
 builder.Services.AddHostedService<OrderCleanupService>();
+builder.Services.AddHostedService<PaymentCleanupService>();
 
 builder.Services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
 

@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UriStore.Application.Interfaces;
 
-namespace UriStore.Infrastructure.BackgroundServices
+namespace UriStore.Infrastructure.Backgrounds
 {
     public class OrderCleanupService(IServiceScopeFactory scopeFactory) : BackgroundService
     {

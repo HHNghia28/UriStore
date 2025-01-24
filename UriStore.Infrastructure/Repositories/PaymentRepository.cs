@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,14 @@ namespace UriStore.Infrastructure.Repositories
         : Repository<Payment>(context), IPaymentRepository
     {
         private readonly ISqlConnectionFactory _sqlConnectionFactory = sqlConnectionFactory;
+        private readonly ApplicationDbContext _context = context;
+
+        public async Task<List<Payment>> GetExpiredsPayments()
+        {
+            return await _context.Payments.Where(p => p.Status == Domain.Enums.PaymentStatus.PENDING
+                && p.LastModifiedAt.HasValue && p.LastModifiedAt.Value.AddMinutes(5) < DateTime.UtcNow)
+                .ToListAsync();
+        }
 
         public async Task<PagedResponse<List<PaymentResponse>>> GetPayments(PagedRequest request)
         {

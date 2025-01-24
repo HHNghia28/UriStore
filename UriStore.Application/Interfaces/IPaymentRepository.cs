@@ -12,5 +12,6 @@ namespace UriStore.Application.Interfaces
     public interface IPaymentRepository :IRepository<Payment>
     {
         Task<PagedResponse<List<PaymentResponse>>> GetPayments(PagedRequest request);
+        Task<List<Payment>> GetExpiredsPayments();
     }
 }

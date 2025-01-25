@@ -54,9 +54,9 @@ namespace UriStore.API.Middlewares
             {
                 await HandleExceptionAsync(context, originalBodyStream, StatusCodes.Status409Conflict, ex.Message);
             }
-            catch
+            catch (Exception ex)
             {
-                await HandleExceptionAsync(context, originalBodyStream, StatusCodes.Status500InternalServerError, "Internal Server Error");
+                await HandleExceptionAsync(context, originalBodyStream, StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 

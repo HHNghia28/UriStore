@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\UriStore.Application\UriStore.Application.csproj" />
     <ProjectReference Include="..\UriStore.Domain\UriStore.Domain.csproj" />
+    <ProjectReference Include="..\UriStore.Infrastructure.Redis\UriStore.Infrastructure.Redis.csproj" />
   </ItemGroup>
 
 </Project>

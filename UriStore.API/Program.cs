@@ -25,6 +25,8 @@ using UriStore.Application.Features.Users.Queries.GetUsers;
 using UriStore.PayOS.Config;
 using UriStore.PayOS.Services;
 using UriStore.Infrastructure.Backgrounds;
+using UriStore.Infrastructure.Redis.Config;
+using UriStore.Infrastructure.Redis.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -94,6 +96,7 @@ builder.Services.AddMediatR(options =>
 
 builder.Services.AddHostedService<OrderCleanupService>();
 builder.Services.AddHostedService<PaymentCleanupService>();
+builder.Services.AddHostedService<SetOrderLastIdForRedis>();
 
 builder.Services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
 
@@ -107,9 +110,13 @@ builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPayOSService, PayOSService>();
+builder.Services.AddSingleton<IRedisService, RedisService>();
 
 builder.Services.Configure<PayOSConfig>(
     builder.Configuration.GetSection(PayOSConfig.ConfigName));
+
+builder.Services.Configure<RedisConfig>(
+    builder.Configuration.GetSection(RedisConfig.ConfigName));
 
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddScoped<IEmailSender, EmailSender>();

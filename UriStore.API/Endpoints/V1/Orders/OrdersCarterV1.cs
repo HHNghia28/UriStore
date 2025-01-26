@@ -15,6 +15,7 @@ namespace Order.API.Endpoints.V1.Orders
     public class OrdersCarterV1 : ICarterModule
     {
         private const string BaseUrl = "api/v{version:apiVersion}/orders";
+        private static readonly SemaphoreSlim _semaphore = new(1, 1);
 
         public void AddRoutes(IEndpointRouteBuilder app)
         {
@@ -47,9 +48,19 @@ namespace Order.API.Endpoints.V1.Orders
 
         public async Task<IResult> Create(ISender sender, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] CreateOrderCommand request)
         {
-            request.CreatedBy = userId;
-            await sender.Send(request);
-            return Results.Ok("Create order successful");
+            await _semaphore.WaitAsync();
+
+            try
+            {
+                request.CreatedBy = userId;
+                await sender.Send(request);
+
+                return Results.Ok("Create order successful");
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         public async Task<IResult> Update(ISender sender, long id, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] UpdateOrderCommand request)

@@ -37,7 +37,7 @@ namespace UriStore.Infrastructure.Backgrounds
                         await orderRepository.SaveAsync();
                     }
 
-                    await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
+                    await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
                 }
                 catch (Exception ex)
                 {

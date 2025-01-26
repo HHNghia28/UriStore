@@ -8,7 +8,8 @@ namespace UriStore.Infrastructure.Redis.Services
 {
     public interface IRedisService
     {
-        public string Get(string key);
-        public void Set(string key, string value);
+        Task<T?> GetAsync<T>(string key);
+        Task SetAsync<T>(string key, T value, TimeSpan expiration);
+        Task RemoveAsync(string key);
     }
 }

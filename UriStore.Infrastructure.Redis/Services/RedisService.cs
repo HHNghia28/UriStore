@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using UriStore.Infrastructure.Redis.Config;
 
@@ -21,14 +22,21 @@ namespace UriStore.Infrastructure.Redis.Services
             _database = _connectionMultiplexer.GetDatabase();
         }
 
-        public void Set(string key, string value)
+        public async Task<T?> GetAsync<T>(string key)
         {
-            _database.StringSet(key, value);
+            var value = await _database.StringGetAsync(key);
+            return value.IsNullOrEmpty ? default : JsonSerializer.Deserialize<T>(value!);
         }
 
-        public string Get(string key)
+        public async Task SetAsync<T>(string key, T value, TimeSpan expiration)
         {
-            return _database.StringGet(key);
+            var jsonValue = JsonSerializer.Serialize(value);
+            await _database.StringSetAsync(key, jsonValue, expiration);
+        }
+
+        public async Task RemoveAsync(string key)
+        {
+            await _database.KeyDeleteAsync(key);
         }
     }
 }

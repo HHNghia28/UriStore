@@ -95,7 +95,6 @@ builder.Services.AddMediatR(options =>
 
 builder.Services.AddHostedService<OrderCleanupService>();
 builder.Services.AddHostedService<PaymentCleanupService>();
-builder.Services.AddHostedService<SetOrderLastIdForRedis>();
 
 builder.Services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
 

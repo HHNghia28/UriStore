@@ -154,9 +154,10 @@ namespace UriStore.Infrastructure.Repositories
 
             const string sqlCount = @"
                     SELECT COUNT(*)
-                    FROM ""Orders""";
+                    FROM ""Orders""
+                    WHERE ""Orders"".""CreatedById"" = @Id";
 
-            var totalRecords = await connection.ExecuteScalarAsync<int>(sqlCount);
+            var totalRecords = await connection.ExecuteScalarAsync<int>(sqlCount, new { Id = userId });
 
             var response = new PagedResponse<List<OrdersResponse>>(
                 Orders.AsList(),

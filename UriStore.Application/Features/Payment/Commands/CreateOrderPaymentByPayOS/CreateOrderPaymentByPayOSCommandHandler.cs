@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UriStore.Application.Exceptions;
 using UriStore.Application.Interfaces;
-using UriStore.PayOS.DTO;
-using UriStore.PayOS.Services;
+using UriStore.Infrastructure.PayOS.DTO;
+using UriStore.Infrastructure.PayOS.Services;
 
 namespace UriStore.Application.Features.Payment.Commands.CreatePaymentOrder
 {

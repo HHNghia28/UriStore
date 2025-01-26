@@ -26,9 +26,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UriStore.Application\UriStore.Application.csproj" />
+    <ProjectReference Include="..\UriStore.Infrastructure.PayOS\UriStore.Infrastructure.PayOS.csproj" />
     <ProjectReference Include="..\UriStore.Infrastructure.Redis\UriStore.Infrastructure.Redis.csproj" />
     <ProjectReference Include="..\UriStore.Infrastructure\UriStore.Infrastructure.csproj" />
-    <ProjectReference Include="..\UriStore.PayOS\UriStore.PayOS.csproj" />
+    <ProjectReference Include="..\UriStore.Presentation\UriStore.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

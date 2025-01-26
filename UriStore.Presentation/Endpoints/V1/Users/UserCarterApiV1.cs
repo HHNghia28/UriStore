@@ -4,6 +4,9 @@ using UriStore.Application.Features.Users.Queries.GetUser;
 using UriStore.Application.Features.Users.Queries.GetUsers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Builder;
 
 namespace Identity.API.Endpoints.V1.Users
 {

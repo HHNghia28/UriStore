@@ -8,8 +8,9 @@ using UriStore.Application.Features.Product.Commands.DeleteProduct;
 using UriStore.Application.Features.Product.Commands.UpdateProduct;
 using UriStore.Application.Features.Product.Queries.GetProduct;
 using UriStore.Application.Features.Product.Queries.GetProducts;
-using System.ComponentModel.DataAnnotations;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace UriStore.API.Endpoints.V1.Products
 {

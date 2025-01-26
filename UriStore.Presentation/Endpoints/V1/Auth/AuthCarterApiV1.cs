@@ -10,9 +10,11 @@ using UriStore.Application.Features.Auth.Commands.ResendEmail;
 using UriStore.Application.Features.Auth.Commands.ResetPassword;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Builder;
 
-namespace UriStore.API.Endpoints.V1.Auth
+namespace UriStore.Presentation.Endpoints.V1.Auth
 {
     public class AuthCarterApiV1 : ICarterModule
     {

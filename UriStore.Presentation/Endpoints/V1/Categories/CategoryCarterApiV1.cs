@@ -1,12 +1,15 @@
 ﻿using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using UriStore.Application.Features.Category.Commands.CreateCategory;
 using UriStore.Application.Features.Category.Commands.DeleteCategory;
 using UriStore.Application.Features.Category.Commands.UpdateCategory;
 using UriStore.Application.Features.Category.Queries.GetCategories;
 
-namespace UriStore.API.Endpoints.V1.Categories
+namespace UriStore.Presentation.Endpoints.V1.Categories
 {
     public class CategoryCarterApiV1 : ICarterModule
     {

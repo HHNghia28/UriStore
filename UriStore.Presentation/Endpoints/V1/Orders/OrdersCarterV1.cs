@@ -1,16 +1,18 @@
 ﻿using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using UriStore.Application.Features.Order.Commands.CancelOrder;
 using UriStore.Application.Features.Order.Commands.CreateOrder;
 using UriStore.Application.Features.Order.Commands.UpdateOrder;
 using UriStore.Application.Features.Order.Queries.GetOrder;
 using UriStore.Application.Features.Order.Queries.GetOrders;
 using UriStore.Application.Features.Order.Queries.GetOrdersByUserId;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace Order.API.Endpoints.V1.Orders
+namespace Order.Presentation.Endpoints.V1.Orders
 {
     public class OrdersCarterV1 : ICarterModule
     {

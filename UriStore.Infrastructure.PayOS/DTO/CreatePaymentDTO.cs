@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UriStore.PayOS.DTO
+namespace UriStore.Infrastructure.PayOS.DTO
 {
     public class CreatePaymentDTO
     {

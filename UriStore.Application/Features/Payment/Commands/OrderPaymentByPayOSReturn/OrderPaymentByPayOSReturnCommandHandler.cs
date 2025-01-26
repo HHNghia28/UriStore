@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UriStore.Application.Exceptions;
 using UriStore.Application.Interfaces;
-using UriStore.PayOS.Config;
+using UriStore.Infrastructure.PayOS.Config;
 
 namespace UriStore.Application.Features.Payment.Commands.OrderPaymentByPayOSReturn
 {

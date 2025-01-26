@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UriStore.PayOS.Config
+namespace UriStore.Infrastructure.PayOS.Config
 {
     public class PayOSConfig
     {

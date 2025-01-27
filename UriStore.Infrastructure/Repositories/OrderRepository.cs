@@ -99,18 +99,24 @@ namespace UriStore.Infrastructure.Repositories
         {
             using var connection = _sqlConnectionFactory.GetOpenConnection();
             const string sqlOrders = @"
-                    SELECT 
-                        ""Orders"".""Id"",
-                        ""Orders"".""FullName"",
-                        ""Orders"".""Phone"",
-                        ""Orders"".""Address"",
-                        ""Orders"".""TotalPrice"",
-                        ""Orders"".""Status"",
-                        ""Orders"".""CreatedAt"",
-                        ""Orders"".""LastModifiedAt""
-                    FROM ""Orders""
-                    ORDER BY ""Orders"".""LastModifiedAt"" DESC
-                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+                SELECT 
+                    ""Orders"".""Id"", 
+                    ""Orders"".""FullName"", 
+                    ""Orders"".""Phone"", 
+                    ""Orders"".""Address"", 
+                    ""Orders"".""TotalPrice"", 
+                    ""Orders"".""Status"", 
+                    ""Orders"".""CreatedAt"", 
+                    ""Orders"".""LastModifiedAt""
+                FROM (
+                    SELECT ""Id""
+                    FROM public.""Orders""
+                    ORDER BY ""LastModifiedAt"" DESC
+                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY
+                ) AS ""OrderFiltered""
+                INNER JOIN public.""Orders"" 
+                ON ""OrderFiltered"".""Id"" = ""Orders"".""Id"";
+            ";
 
             var offset = (request.PageNumber - 1) * request.PageSize;
             var Orders = await connection.QueryAsync<OrdersResponse>(sqlOrders, new { Offset = offset, PageSize = request.PageSize });

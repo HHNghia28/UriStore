@@ -14,7 +14,7 @@ using UriStore.Application.Features.Order.Queries.GetOrdersByUserId;
 
 namespace Order.Presentation.Endpoints.V1.Orders
 {
-    public class OrdersCarterV1 : ICarterModule
+    public class OrdersCarterV1(IHttpContextAccessor _httpContextAccessor) : ICarterModule
     {
         private const string BaseUrl = "api/v{version:apiVersion}/orders";
         private static readonly SemaphoreSlim _semaphore = new(1, 1);
@@ -48,13 +48,17 @@ namespace Order.Presentation.Endpoints.V1.Orders
             return Results.Ok(await sender.Send(new GetOrdersByUserIdQuery { PageNumber = pageNumber, PageSize = pageSize, UserId = userId }));
         }
 
-        public async Task<IResult> Create(ISender sender, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] CreateOrderCommand request)
+        public async Task<IResult> Create(ISender sender, [FromBody] CreateOrderCommand request)
         {
             await _semaphore.WaitAsync();
 
             try
             {
-                request.CreatedBy = userId;
+                var userId = _httpContextAccessor.HttpContext.Request.Headers["X-User-Id"].FirstOrDefault();
+
+                if (userId == null) return Results.BadRequest("UserId is missing in the request.");
+
+                request.CreatedBy = new Guid(userId);
                 await sender.Send(request);
 
                 return Results.Ok("Create order successful");

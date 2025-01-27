@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UriStore.Domain.Common;
+using UriStore.Domain.Shares;
 
 namespace UriStore.Application.DTO
 {
@@ -23,7 +25,7 @@ namespace UriStore.Application.DTO
         public string Address { get; set; }
         public int TotalPrice { get; set; } = 0;
         public OrderStatus Status { get; set; } = OrderStatus.PENDING;
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? LastModifiedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateUtility.GetCurrentDateTime();
+        public DateTime? LastModifiedAt { get; set; } = DateUtility.GetCurrentDateTime();
     }
 }

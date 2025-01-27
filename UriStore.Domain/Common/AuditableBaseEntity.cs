@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UriStore.Domain.Shares;
 
 namespace UriStore.Domain.Common
 {
@@ -12,8 +13,8 @@ namespace UriStore.Domain.Common
         [Key]
         public virtual T Id { get; set; }
         public Guid CreatedById { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateUtility.GetCurrentDateTime();
         public Guid LastModifiedById { get; set; }
-        public DateTime? LastModifiedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? LastModifiedAt { get; set; } = DateUtility.GetCurrentDateTime();
     }
 }

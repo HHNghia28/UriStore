@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UriStore.Infrastructure.Shares
+namespace UriStore.Domain.Shares
 {
     public static class Util
     {

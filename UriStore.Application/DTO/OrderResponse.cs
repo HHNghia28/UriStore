@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UriStore.Domain.Shares;
 
 namespace UriStore.Application.DTO
 {
@@ -37,8 +38,8 @@ namespace UriStore.Application.DTO
         public OrderStatus Status { get; set; } = OrderStatus.PENDING;
         public ICollection<OrderDetailResponse> Details { get; set; }
         public Guid CreatedById { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateUtility.GetCurrentDateTime();
         public Guid LastModifiedById { get; set; }
-        public DateTime? LastModifiedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? LastModifiedAt { get; set; } = DateUtility.GetCurrentDateTime();
     }
 }

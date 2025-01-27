@@ -7,13 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using UriStore.Domain.Common;
 using UriStore.Domain.Enums;
+using UriStore.Domain.Shares;
 
 namespace UriStore.Domain.Entities
 {
     public class Payment : AuditableBaseEntity<long>
     {
         public int AmountCharged { get; set; }
-        public DateTime TimeCharge { get; set; } = DateTime.UtcNow;
+        public DateTime TimeCharge { get; set; } = DateUtility.GetCurrentDateTime();
         public PaymentStatus Status { get; set; } = PaymentStatus.PENDING;
         public string PaymentLink { get; set; }
         [ForeignKey(nameof(Id))]

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UriStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using UriStore.Domain.Shares;
 
 namespace UriStore.Infrastructure.Repositories
 {
@@ -24,7 +25,7 @@ namespace UriStore.Infrastructure.Repositories
                 .Include(o => o.Details)
                 .ThenInclude(o => o.Product)
                 .Where(o => o.Status == Domain.Enums.OrderStatus.PENDING 
-                && o.LastModifiedAt.HasValue && o.LastModifiedAt.Value.AddMinutes(5) < DateTime.UtcNow)
+                && o.LastModifiedAt.HasValue && o.LastModifiedAt.Value.AddMinutes(5) < DateUtility.GetCurrentDateTime())
                 .ToListAsync();
         }
 
@@ -32,7 +33,7 @@ namespace UriStore.Infrastructure.Repositories
         {
             using var connection = _sqlConnectionFactory.GetOpenConnection();
 
-            var currentDate = DateTime.UtcNow.Date;
+            var currentDate = DateUtility.GetCurrentDateTime().Date;
 
             const string sqlOrders = @"
                 SELECT ""Id""
@@ -141,19 +142,25 @@ namespace UriStore.Infrastructure.Repositories
         {
             using var connection = _sqlConnectionFactory.GetOpenConnection();
             const string sqlOrders = @"
-                    SELECT 
-                        ""Orders"".""Id"",
-                        ""Orders"".""FullName"",
-                        ""Orders"".""Phone"",
-                        ""Orders"".""Address"",
-                        ""Orders"".""TotalPrice"",
-                        ""Orders"".""Status"",
-                        ""Orders"".""CreatedAt"",
-                        ""Orders"".""LastModifiedAt""
-                    FROM ""Orders""
+                SELECT 
+                    ""Orders"".""Id"", 
+                    ""Orders"".""FullName"", 
+                    ""Orders"".""Phone"", 
+                    ""Orders"".""Address"", 
+                    ""Orders"".""TotalPrice"", 
+                    ""Orders"".""Status"", 
+                    ""Orders"".""CreatedAt"", 
+                    ""Orders"".""LastModifiedAt""
+                FROM (
+                    SELECT ""Id""
+                    FROM public.""Orders""
                     WHERE ""Orders"".""CreatedById"" = @Id
-                    ORDER BY ""Orders"".""LastModifiedAt"" DESC
-                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+                    ORDER BY ""LastModifiedAt"" DESC
+                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY
+                ) AS ""OrderFiltered""
+                INNER JOIN public.""Orders"" 
+                ON ""OrderFiltered"".""Id"" = ""Orders"".""Id"";
+            ";
 
             var offset = (request.PageNumber - 1) * request.PageSize;
             var Orders = await connection.QueryAsync<OrdersResponse>(sqlOrders, new { Offset = offset, PageSize = request.PageSize, Id = userId });

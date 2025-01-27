@@ -6,7 +6,7 @@ using UriStore.Application.Wrappers;
 using UriStore.Domain;
 using UriStore.Domain.Entities;
 using UriStore.Infrastructure.Context;
-using UriStore.Infrastructure.Shares;
+using UriStore.Domain.Shares;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace UriStore.Infrastructure.Repositories
             if (user == null) return false;
 
             var confirm = await _context.EmailConfirmationTokens
-                .FirstOrDefaultAsync(e => e.UserId == userId && e.Token.Equals(code) && e.ExpirationDate >= DateTime.UtcNow);
+                .FirstOrDefaultAsync(e => e.UserId == userId && e.Token.Equals(code) && e.ExpirationDate >= DateUtility.GetCurrentDateTime());
 
             return confirm != null;
         }
@@ -60,7 +60,7 @@ namespace UriStore.Infrastructure.Repositories
             await _context.EmailConfirmationTokens.AddAsync(new EmailConfirmationToken
             {
                 Id = Guid.NewGuid(),
-                ExpirationDate = DateTime.UtcNow.AddMinutes(5),
+                ExpirationDate = DateUtility.GetCurrentDateTime().AddMinutes(5),
                 Token = code,
                 UserId = userId
             });
@@ -109,7 +109,7 @@ namespace UriStore.Infrastructure.Repositories
                 .Include(t => t.User)
                 .ThenInclude(t => t.Role)
                 .FirstOrDefaultAsync(t => t.Token.ToLower().Equals(refreshToken.ToLower()) 
-                && t.ExpirationDate >= DateTime.UtcNow);
+                && t.ExpirationDate >= DateUtility.GetCurrentDateTime());
 
             return token?.User;
         }

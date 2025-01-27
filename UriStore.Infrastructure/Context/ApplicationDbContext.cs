@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection.Emit;
+using UriStore.Domain.Shares;
 
 namespace UriStore.Infrastructure.Context
 {
@@ -189,7 +190,7 @@ namespace UriStore.Infrastructure.Context
                     }
                 );
 
-            long orderId = long.Parse(DateTime.UtcNow.ToString("yyyyMMdd") + "000001");
+            long orderId = long.Parse(DateUtility.GetCurrentDateTime().ToString("yyyyMMdd") + "000001");
 
             builder.Entity<Order>()
                 .HasData(
@@ -267,25 +268,25 @@ namespace UriStore.Infrastructure.Context
                 {
                     if (entry.State == EntityState.Added)
                     {
-                        order.CreatedAt = DateTime.UtcNow;
+                        order.CreatedAt = DateUtility.GetCurrentDateTime();
                     }
-                    order.LastModifiedAt = DateTime.UtcNow;
+                    order.LastModifiedAt = DateUtility.GetCurrentDateTime();
                 }
                 if (entry.Entity is Product product)
                 {
                     if (entry.State == EntityState.Added)
                     {
-                        product.CreatedAt = DateTime.UtcNow;
+                        product.CreatedAt = DateUtility.GetCurrentDateTime();
                     }
-                    product.LastModifiedAt = DateTime.UtcNow;
+                    product.LastModifiedAt = DateUtility.GetCurrentDateTime();
                 }
                 if (entry.Entity is Category category)
                 {
                     if (entry.State == EntityState.Added)
                     {
-                        category.CreatedAt = DateTime.UtcNow;
+                        category.CreatedAt = DateUtility.GetCurrentDateTime();
                     }
-                    category.LastModifiedAt = DateTime.UtcNow;
+                    category.LastModifiedAt = DateUtility.GetCurrentDateTime();
                 }
             }
 

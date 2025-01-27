@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UriStore.Domain.Common;
+using UriStore.Domain.Shares;
 
 namespace UriStore.Application.Features.Auth.Commands.LoginUser
 {
@@ -25,7 +27,7 @@ namespace UriStore.Application.Features.Auth.Commands.LoginUser
             var accessToken = _tokenService.GenerateJwtToken(user);
             var refreshToken = _tokenService.GenerateRefreshToken(64);
 
-            await _userRepository.SaveRefreshToken(user.Id, refreshToken, DateTime.UtcNow.AddDays(1));
+            await _userRepository.SaveRefreshToken(user.Id, refreshToken, DateUtility.GetCurrentDateTime().AddDays(1));
             await _userRepository.SaveAsync();
 
             return new LoginResponse

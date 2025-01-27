@@ -9,6 +9,7 @@ using UriStore.Application.DTO;
 using UriStore.Application.Interfaces;
 using UriStore.Application.Wrappers;
 using UriStore.Domain.Entities;
+using UriStore.Domain.Shares;
 using UriStore.Infrastructure.Context;
 
 namespace UriStore.Infrastructure.Repositories
@@ -19,7 +20,7 @@ namespace UriStore.Infrastructure.Repositories
         public async Task<List<Payment>> GetExpiredsPayments()
         {
             return await _context.Payments.Where(p => p.Status == Domain.Enums.PaymentStatus.PENDING
-                && p.LastModifiedAt.HasValue && p.LastModifiedAt.Value.AddMinutes(5) < DateTime.UtcNow)
+                && p.LastModifiedAt.HasValue && p.LastModifiedAt.Value.AddMinutes(5) < DateUtility.GetCurrentDateTime())
                 .ToListAsync();
         }
 

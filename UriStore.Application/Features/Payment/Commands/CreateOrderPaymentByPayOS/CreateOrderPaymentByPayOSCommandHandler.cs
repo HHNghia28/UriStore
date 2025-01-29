@@ -22,32 +22,30 @@ namespace UriStore.Application.Features.Payment.Commands.CreatePaymentOrder
 
             var payment = await _paymentRepository.GetByIdAsync(order.Id);
 
-            if (payment == null)
-            {
-                paymentLink = await _payOSService.CreatePaymentAsync(new CreatePaymentDTO()
-                {
-                    OrderCode = order.Id,
-                    Content = order.Id.ToString(),
-                    RequiredAmount = 5000,
-                });
-
-                await _paymentRepository.AddAsync(new Domain.Entities.Payment()
-                {
-                    Id = request.OrderId,
-                    AmountCharged = order.TotalPrice,
-                    PaymentLink = paymentLink,
-                    CreatedById = request.CreatedById,
-                    LastModifiedById = request.CreatedById,
-                });
-
-                await _paymentRepository.SaveAsync();
-            }
-            else
+            if (payment != null)
             {
                 if (payment.Status == Domain.Enums.PaymentStatus.PAIDED) throw new InvalidOperationException("Order paided");
 
-                paymentLink = payment.PaymentLink;
+                if (!payment.PaymentLink.Equals("")) return payment.PaymentLink;
             }
+
+            paymentLink = await _payOSService.CreatePaymentAsync(new CreatePaymentDTO()
+            {
+                OrderCode = order.Id,
+                Content = order.Id.ToString(),
+                RequiredAmount = 5000,
+            });
+
+            await _paymentRepository.AddAsync(new Domain.Entities.Payment()
+            {
+                Id = request.OrderId,
+                AmountCharged = order.TotalPrice,
+                PaymentLink = paymentLink,
+                CreatedById = request.CreatedById,
+                LastModifiedById = request.CreatedById,
+            });
+
+            await _paymentRepository.SaveAsync();
 
             return paymentLink;
         }

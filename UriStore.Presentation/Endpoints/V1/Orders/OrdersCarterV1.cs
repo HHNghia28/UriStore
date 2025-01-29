@@ -11,18 +11,18 @@ using UriStore.Application.Features.Order.Commands.UpdateOrder;
 using UriStore.Application.Features.Order.Queries.GetOrder;
 using UriStore.Application.Features.Order.Queries.GetOrders;
 using UriStore.Application.Features.Order.Queries.GetOrdersByUserId;
+using UriStore.Application.Features.Payment.Commands.CreatePaymentOrder;
 
 namespace Order.Presentation.Endpoints.V1.Orders
 {
-    public class OrdersCarterV1(IHttpContextAccessor _httpContextAccessor) : ICarterModule
+    public class OrdersCarterV1() : ICarterModule
     {
         private const string BaseUrl = "api/v{version:apiVersion}/orders";
-        private static readonly SemaphoreSlim _semaphore = new(1, 1);
 
         public void AddRoutes(IEndpointRouteBuilder app)
         {
             var group1 = app.NewVersionedApi("order-carter-name-show-on-swagger")
-            .MapGroup(BaseUrl)
+                .MapGroup(BaseUrl)
                 .HasApiVersion(1);
 
             group1.MapGet(string.Empty, GetAll);
@@ -48,25 +48,11 @@ namespace Order.Presentation.Endpoints.V1.Orders
             return Results.Ok(await sender.Send(new GetOrdersByUserIdQuery { PageNumber = pageNumber, PageSize = pageSize, UserId = userId }));
         }
 
-        public async Task<IResult> Create(ISender sender, [FromBody] CreateOrderCommand request)
+        public async Task<IResult> Create(ISender sender, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] CreateOrderCommand request)
         {
-            await _semaphore.WaitAsync();
-
-            try
-            {
-                var userId = _httpContextAccessor.HttpContext.Request.Headers["X-User-Id"].FirstOrDefault();
-
-                if (userId == null) return Results.BadRequest("UserId is missing in the request.");
-
-                request.CreatedBy = new Guid(userId);
-                await sender.Send(request);
-
-                return Results.Ok("Create order successful");
-            }
-            finally
-            {
-                _semaphore.Release();
-            }
+            request.CreatedBy = userId;
+            long id = await sender.Send(request);
+            return Results.Ok(id);
         }
 
         public async Task<IResult> Update(ISender sender, long id, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] UpdateOrderCommand request)

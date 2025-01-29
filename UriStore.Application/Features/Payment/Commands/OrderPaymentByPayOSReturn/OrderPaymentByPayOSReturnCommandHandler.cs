@@ -11,7 +11,9 @@ using UriStore.Infrastructure.PayOS.Config;
 
 namespace UriStore.Application.Features.Payment.Commands.OrderPaymentByPayOSReturn
 {
-    public class OrderPaymentByPayOSReturnCommandHandler(IPaymentRepository _paymentRepository, IOrderRepository _orderRepository
+    public class OrderPaymentByPayOSReturnCommandHandler(IPaymentRepository _paymentRepository
+        , IOrderRepository _orderRepository
+        , IProductRepository _productRepository
         , IOptions<PayOSConfig> payosConfigOptions) 
         : IRequestHandler<OrderPaymentByPayOSReturnCommand, string>
     {
@@ -30,6 +32,14 @@ namespace UriStore.Application.Features.Payment.Commands.OrderPaymentByPayOSRetu
             }
             else
             {
+                order.Status = Domain.Enums.OrderStatus.CANCEL;
+                await _orderRepository.UpdateAsync(order);
+
+                foreach (var detail in order.Details)
+                {
+                    detail.Product.Stock += detail.Quantity;
+                    await _productRepository.UpdateAsync(detail.Product);
+                }
                 payment.Status = Domain.Enums.PaymentStatus.CANCEL;
             }
 

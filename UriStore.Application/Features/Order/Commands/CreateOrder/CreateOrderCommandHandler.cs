@@ -7,18 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using UriStore.Application.Exceptions;
 using UriStore.Domain.Entities;
+using UriStore.Domain.Shares;
 
 namespace UriStore.Application.Features.Order.Commands.CreateOrder
 {
     public class CreateOrderCommandHandler(IOrderRepository _orderRepository, IProductRepository _productRepository) 
-        : IRequestHandler<CreateOrderCommand>
+        : IRequestHandler<CreateOrderCommand, long>
     {
-        public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<long> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             List<OrderDetail> orderDetails = [];
-            long lastId = await _orderRepository.GetLastId();
-
-            long orderId = lastId + 1;
+            long orderId = OrderIdUtility.GetNewOrderId();
 
             foreach (var item in request.Details)
             {
@@ -67,6 +66,8 @@ namespace UriStore.Application.Features.Order.Commands.CreateOrder
             });
 
             await _orderRepository.SaveAsync();
+
+            return orderId;
         }
 
     }

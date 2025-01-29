@@ -19,13 +19,20 @@ namespace UriStore.Infrastructure.Repositories
     public class OrderRepository(ApplicationDbContext _context, ISqlConnectionFactory _sqlConnectionFactory) 
         : Repository<Order>(_context), IOrderRepository
     {
+        public override async Task<Order> GetByIdAsync<TKey>(TKey id)
+        {
+            return await _context.Orders
+                .Include(o => o.Details)
+                .ThenInclude(o => o.Product)
+                .FirstOrDefaultAsync(o => Guid.Equals(o.Id, id));
+        }
         public async Task<List<Order>> GetExpiredOrders()
         {
             return await _context.Orders
                 .Include(o => o.Details)
                 .ThenInclude(o => o.Product)
                 .Where(o => o.Status == Domain.Enums.OrderStatus.PENDING 
-                && o.LastModifiedAt.HasValue && o.LastModifiedAt.Value.AddMinutes(5) < DateUtility.GetCurrentDateTime())
+                && o.LastModifiedAt.HasValue && o.LastModifiedAt.Value.AddMinutes(3) < DateUtility.GetCurrentDateTime())
                 .ToListAsync();
         }
 

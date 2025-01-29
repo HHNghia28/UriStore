@@ -13,32 +13,32 @@ namespace UriStore.Infrastructure.Repositories
     {
         private readonly DbSet<T> _dbSet = _context.Set<T>();
 
-        public async Task<T> GetByIdAsync<TKey>(TKey id)
+        public async virtual Task<T> GetByIdAsync<TKey>(TKey id)
         {
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async virtual Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task AddAsync(T entity)
+        public async virtual Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task UpdateAsync(T entity)
+        public async virtual Task UpdateAsync(T entity)
         {
             _dbSet.Update(entity);
         }
 
-        public async Task DeleteAsync(T entity)
+        public async virtual Task DeleteAsync(T entity)
         {
             _dbSet.Remove(entity);
         }
 
-        public async Task SaveAsync()
+        public async virtual Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }

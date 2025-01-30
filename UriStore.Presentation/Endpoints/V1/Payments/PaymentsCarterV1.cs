@@ -13,7 +13,7 @@ using UriStore.Application.Features.Product.Commands.UpdateProduct;
 using UriStore.Application.Features.Product.Queries.GetProduct;
 using UriStore.Application.Features.Product.Queries.GetProducts;
 
-namespace UriStore.API.Endpoints.V1.Payments
+namespace UriStore.Presentation.Endpoints.V1.Payments
 {
     public class PaymentsCarterV1 : ICarterModule
     {

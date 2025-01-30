@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
-namespace UriStore.API.Endpoints.V1.Products
+namespace UriStore.Presentation.Endpoints.V1.Products
 {
     public class ProductsCarterV1 : ICarterModule
     {

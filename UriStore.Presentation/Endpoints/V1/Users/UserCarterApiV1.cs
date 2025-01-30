@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 
-namespace Identity.API.Endpoints.V1.Users
+namespace UriStore.Presentation.Endpoints.V1.Users
 {
     public class UserCarterApiV1 : ICarterModule
     {

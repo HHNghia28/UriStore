@@ -13,7 +13,7 @@ using UriStore.Application.Features.Order.Queries.GetOrders;
 using UriStore.Application.Features.Order.Queries.GetOrdersByUserId;
 using UriStore.Application.Features.Payment.Commands.CreatePaymentOrder;
 
-namespace Order.Presentation.Endpoints.V1.Orders
+namespace UriStore.Presentation.Endpoints.V1.Orders
 {
     public class OrdersCarterV1() : ICarterModule
     {

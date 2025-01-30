@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
 using UriStore.Application.Features.Order.Commands.CancelOrder;
 using UriStore.Application.Features.Order.Commands.CreateOrder;
 using UriStore.Application.Features.Order.Commands.UpdateOrder;
@@ -12,6 +13,7 @@ using UriStore.Application.Features.Order.Queries.GetOrder;
 using UriStore.Application.Features.Order.Queries.GetOrders;
 using UriStore.Application.Features.Order.Queries.GetOrdersByUserId;
 using UriStore.Application.Features.Payment.Commands.CreatePaymentOrder;
+using UriStore.Application.Interfaces;
 
 namespace UriStore.Presentation.Endpoints.V1.Orders
 {
@@ -48,11 +50,26 @@ namespace UriStore.Presentation.Endpoints.V1.Orders
             return Results.Ok(await sender.Send(new GetOrdersByUserIdQuery { PageNumber = pageNumber, PageSize = pageSize, UserId = userId }));
         }
 
-        public async Task<IResult> Create(ISender sender, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] CreateOrderCommand request)
+        public async Task<IResult> Create(IBackgroundTaskQueue backgroundTaskQueue, IServiceProvider serviceProvider, ISender sender, 
+            [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] CreateOrderCommand request)
         {
             request.CreatedBy = userId;
-            long id = await sender.Send(request);
-            return Results.Ok(id);
+            long orderId = await sender.Send(request);
+
+            backgroundTaskQueue.QueueBackgroundWorkItem(async token =>
+            {
+                using var scope = serviceProvider.CreateScope();
+                var scopedSender = scope.ServiceProvider.GetRequiredService<ISender>();
+                var createPaymentCommand = new CreateOrderPaymentByPayOSCommand
+                {
+                    CreatedById = userId,
+                    OrderId = orderId
+                };
+
+                await scopedSender.Send(createPaymentCommand, token);
+            });
+
+            return Results.Ok(orderId);
         }
 
         public async Task<IResult> Update(ISender sender, long id, [FromHeader(Name = "X-User-Id")] Guid userId, [FromBody] UpdateOrderCommand request)

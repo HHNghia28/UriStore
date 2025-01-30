@@ -95,6 +95,7 @@ builder.Services.AddMediatR(options =>
 
 builder.Services.AddHostedService<OrderCleanupService>();
 builder.Services.AddHostedService<PaymentCleanupService>();
+builder.Services.AddHostedService<BackgroundTaskService>();
 
 builder.Services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
 
@@ -104,6 +105,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
 
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<ITokenService, TokenService>();

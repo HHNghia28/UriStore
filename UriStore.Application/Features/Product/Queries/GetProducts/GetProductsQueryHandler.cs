@@ -28,7 +28,7 @@ namespace UriStore.Application.Features.Product.Queries.GetProducts
                 PageSize = request.PageSize,
             });
 
-            await _redisService.SetAsync(cacheKey, products, TimeSpan.FromSeconds(3));
+            await _redisService.SetAsync(cacheKey, products, TimeSpan.FromMinutes(10));
 
             return products;
         }

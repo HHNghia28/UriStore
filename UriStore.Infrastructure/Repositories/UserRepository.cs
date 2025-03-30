@@ -155,6 +155,7 @@ namespace UriStore.Infrastructure.Repositories
                     users.AsList(),
                     request.PageNumber,
                     request.PageSize,
+                totalRecords,
                     (int)Math.Ceiling((double)totalRecords / request.PageSize)
                 );
 

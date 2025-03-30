@@ -9,16 +9,15 @@ namespace UriStore.Application.Wrappers
         public int PageNumber { get; set; }
         public int TotalPage { get; set; }
         public int PageSize { get; set; }
+        public int TotalRecord { get; set; }
 
-        public PagedResponse(T data, int pageNumber, int pageSize, int totalPage)
+        public PagedResponse(T data, int pageNumber, int pageSize, int totalPage, int totalRecord)
         {
-            this.PageNumber = pageNumber;
-            this.TotalPage = totalPage;
-            this.PageSize = pageSize;
-            this.Data = data;
-            this.Message = null;
-            this.Succeeded = true;
-            this.Errors = null;
+            PageNumber = pageNumber;
+            TotalPage = totalPage;
+            PageSize = pageSize;
+            Data = data;
+            TotalRecord = totalRecord;
         }
     }
 }

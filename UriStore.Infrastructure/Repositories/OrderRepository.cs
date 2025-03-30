@@ -139,6 +139,7 @@ namespace UriStore.Infrastructure.Repositories
                 Orders.AsList(),
                 request.PageNumber,
                 request.PageSize,
+                totalRecords,
                 (int)Math.Ceiling((double)totalRecords / request.PageSize)
             );
 
@@ -183,6 +184,7 @@ namespace UriStore.Infrastructure.Repositories
                 Orders.AsList(),
                 request.PageNumber,
                 request.PageSize,
+                totalRecords,
                 (int)Math.Ceiling((double)totalRecords / request.PageSize)
             );
 
